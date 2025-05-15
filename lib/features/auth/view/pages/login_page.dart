@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:news_app_fe/core/widgets/custom_app_bar.dart';
 import 'package:news_app_fe/features/auth/view/widgets/custom_button.dart';
 import 'package:news_app_fe/features/auth/view/widgets/form_text_field.dart';
+import 'package:news_app_fe/features/auth/view/widgets/or_divider.dart';
 
 class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});
@@ -57,7 +58,24 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   textfieldIcon: 'assets/icons/lock.svg',
                 ),
                 SizedBox(height: 32),
-                CustomButton(buttonText: 'SIGN IN'),
+                CustomButton(
+                  buttonLabel: 'SIGN IN',
+                  buttonLabelColor: '0xffffffff',
+                  buttonColor: '0xff0864ED',
+                ),
+                SizedBox(height: 32),
+                const OrDivider(),
+                SizedBox(height: 32),
+                CustomButton(
+                  buttonLabel: 'Sign in with Google',
+                  buttonIcon: 'assets/icons/google_icon.svg',
+                ),
+                SizedBox(height: 20),
+                CustomButton(
+                  buttonLabel: 'Sign in with Facebook',
+                  buttonIcon: 'assets/icons/facebook_icon.svg',
+                ),
+                SizedBox(height: 20),
               ],
             ),
           ),
