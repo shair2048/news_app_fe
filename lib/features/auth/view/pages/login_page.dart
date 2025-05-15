@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 // import 'package:flutter_svg/svg.dart';
 import 'package:news_app_fe/core/widgets/custom_app_bar.dart';
+import 'package:news_app_fe/features/auth/view/widgets/custom_button.dart';
 import 'package:news_app_fe/features/auth/view/widgets/form_text_field.dart';
 
 class LoginPage extends ConsumerStatefulWidget {
@@ -16,6 +17,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(),
+      backgroundColor: Colors.white,
       body: Column(
         children: [
           Padding(
@@ -26,7 +28,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 Text(
                   'WELCOME BACK!',
                   style: TextStyle(
-                    color: Color(0xff191F33),
+                    color: Color(0xff767E94),
                     fontSize: 12,
                     fontFamily: 'Nunito',
                     fontWeight: FontWeight.w600,
@@ -54,6 +56,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   textfieldHint: 'Password',
                   textfieldIcon: 'assets/icons/lock.svg',
                 ),
+                SizedBox(height: 32),
+                CustomButton(buttonText: 'SIGN IN'),
               ],
             ),
           ),

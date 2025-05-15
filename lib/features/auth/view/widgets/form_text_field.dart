@@ -1,5 +1,4 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -23,7 +22,7 @@ class FormTextField extends ConsumerWidget {
           textfieldLabel ?? '',
           style: TextStyle(
             color: Color(0xff767E94),
-            fontSize: 16,
+            fontSize: 14,
             fontFamily: 'Nunito',
             fontWeight: FontWeight.w400,
           ),
@@ -35,7 +34,7 @@ class FormTextField extends ConsumerWidget {
             hintStyle: TextStyle(
               color: Color(0xff767E94),
               fontSize: 16,
-              fontFamily: 'Nunito',
+              fontFamily: 'Inter',
               fontWeight: FontWeight.w400,
             ),
             prefixIcon:
