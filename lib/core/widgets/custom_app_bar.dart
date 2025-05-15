@@ -37,7 +37,7 @@ class CustomAppBar extends ConsumerWidget implements PreferredSizeWidget {
       ),
       bottom: PreferredSize(
         preferredSize: Size.fromHeight(0.5),
-        child: Container(color: Colors.grey, height: 1),
+        child: Container(color: Colors.grey, height: 0.5),
       ),
     );
   }
