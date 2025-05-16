@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 // import 'package:flutter_svg/svg.dart';
 import 'package:news_app_fe/core/widgets/custom_app_bar.dart';
+import 'package:news_app_fe/features/auth/view/widgets/auth_footer.dart';
 import 'package:news_app_fe/features/auth/view/widgets/custom_button.dart';
 import 'package:news_app_fe/features/auth/view/widgets/form_text_field.dart';
 import 'package:news_app_fe/features/auth/view/widgets/or_divider.dart';
@@ -76,6 +77,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   buttonIcon: 'assets/icons/facebook_icon.svg',
                 ),
                 SizedBox(height: 20),
+                AuthFooter(actionText: 'Sign Up'),
               ],
             ),
           ),
