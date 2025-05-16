@@ -7,12 +7,15 @@ class CustomButton extends ConsumerWidget {
   final String? buttonLabelColor;
   final String? buttonIcon;
   final String? buttonColor;
+  final VoidCallback? onPressed;
+
   const CustomButton({
     super.key,
     this.buttonLabel,
     this.buttonLabelColor,
     this.buttonIcon,
     this.buttonColor,
+    this.onPressed,
   });
 
   @override
@@ -20,9 +23,7 @@ class CustomButton extends ConsumerWidget {
     return SizedBox(
       width: double.infinity,
       child: ElevatedButton.icon(
-        onPressed: () {
-          // press to action
-        },
+        onPressed: onPressed,
         icon:
             buttonIcon != null
                 ? SvgPicture.asset(buttonIcon!, width: 20, height: 20)
