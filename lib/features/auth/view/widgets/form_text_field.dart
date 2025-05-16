@@ -6,11 +6,18 @@ class FormTextField extends ConsumerWidget {
   final String? textfieldLabel;
   final String? textfieldHint;
   final String? textfieldIcon;
+  final TextEditingController? controller;
+  final FormFieldValidator<String>? validator;
+  final bool obscureText;
+
   const FormTextField({
     super.key,
+    this.controller,
+    this.validator,
     this.textfieldLabel,
     this.textfieldHint,
     this.textfieldIcon,
+    this.obscureText = false,
   });
 
   @override
@@ -29,6 +36,9 @@ class FormTextField extends ConsumerWidget {
         ),
         SizedBox(height: 8),
         TextFormField(
+          controller: controller,
+          validator: validator,
+          obscureText: obscureText,
           decoration: InputDecoration(
             hintText: textfieldHint ?? '',
             hintStyle: TextStyle(
