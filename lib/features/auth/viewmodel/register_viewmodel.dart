@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:news_app_fe/features/auth/models/register_state.dart';
+import 'package:news_app_fe/features/auth/viewmodel/register_state.dart';
 
 class RegisterViewModel extends StateNotifier<RegisterState> {
   RegisterViewModel() : super(const RegisterState());
