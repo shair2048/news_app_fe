@@ -3,19 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class CustomButton extends ConsumerWidget {
-  final String? buttonLabel;
-  final String? buttonLabelColor;
+  final String buttonLabel;
+  final Color buttonLabelColor;
   final String? buttonIcon;
-  final String? buttonColor;
-  final VoidCallback? onPressed;
+  final Color buttonColor;
+  final VoidCallback onPressed;
 
   const CustomButton({
     super.key,
-    this.buttonLabel,
-    this.buttonLabelColor,
+    required this.buttonLabel,
+    required this.buttonLabelColor,
     this.buttonIcon,
-    this.buttonColor,
-    this.onPressed,
+    required this.buttonColor,
+    required this.onPressed,
   });
 
   @override
@@ -30,10 +30,7 @@ class CustomButton extends ConsumerWidget {
                 : null,
 
         style: ElevatedButton.styleFrom(
-          backgroundColor:
-              buttonColor != null
-                  ? Color(int.parse(buttonColor!))
-                  : const Color(0xffffffff),
+          backgroundColor: buttonColor,
           padding: EdgeInsets.symmetric(vertical: 16),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(0),
@@ -43,12 +40,9 @@ class CustomButton extends ConsumerWidget {
         ),
 
         label: Text(
-          buttonLabel ?? '',
+          buttonLabel,
           style: TextStyle(
-            color:
-                buttonLabelColor != null
-                    ? Color(int.parse(buttonLabelColor!))
-                    : const Color(0xff000000),
+            color: buttonLabelColor,
             fontSize: 14,
             fontFamily: 'Inter',
             fontWeight: FontWeight.w400,

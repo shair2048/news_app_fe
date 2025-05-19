@@ -2,14 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AuthFooter extends ConsumerWidget {
-  final String? actionText;
+  final String actionText;
   final VoidCallback? onTap;
 
-  const AuthFooter({
-    super.key,
-    this.actionText,
-    this.onTap,
-  });
+  const AuthFooter({super.key, required this.actionText, this.onTap});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -32,13 +28,13 @@ class AuthFooter extends ConsumerWidget {
               child: GestureDetector(
                 onTap: onTap,
                 child: Text(
-                  actionText ?? '',
+                  actionText,
                   style: const TextStyle(
                     color: Color(0xff6938EF),
                     fontSize: 11,
                     fontFamily: 'Inter',
                     fontWeight: FontWeight.w500,
-                    decoration: TextDecoration.underline,
+                    // decoration: TextDecoration.underline,
                   ),
                 ),
               ),

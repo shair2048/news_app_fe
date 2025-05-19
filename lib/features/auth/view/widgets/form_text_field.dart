@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class FormTextField extends ConsumerWidget {
-  final String? textfieldLabel;
-  final String? textfieldHint;
-  final String? textfieldIcon;
+  final String textfieldLabel;
+  final String textfieldHint;
+  final String textfieldIcon;
   final TextEditingController? controller;
   final FormFieldValidator<String>? validator;
   final bool obscureText;
@@ -14,9 +14,9 @@ class FormTextField extends ConsumerWidget {
     super.key,
     this.controller,
     this.validator,
-    this.textfieldLabel,
-    this.textfieldHint,
-    this.textfieldIcon,
+    required this.textfieldLabel,
+    required this.textfieldHint,
+    required this.textfieldIcon,
     this.obscureText = false,
   });
 
@@ -26,7 +26,7 @@ class FormTextField extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          textfieldLabel ?? '',
+          textfieldLabel,
           style: TextStyle(
             color: Color(0xff767E94),
             fontSize: 14,
@@ -40,28 +40,25 @@ class FormTextField extends ConsumerWidget {
           validator: validator,
           obscureText: obscureText,
           decoration: InputDecoration(
-            hintText: textfieldHint ?? '',
+            hintText: textfieldHint,
             hintStyle: TextStyle(
               color: Color(0xff767E94),
               fontSize: 16,
               fontFamily: 'Inter',
               fontWeight: FontWeight.w400,
             ),
-            prefixIcon:
-                textfieldIcon != null
-                    ? Padding(
-                      padding: const EdgeInsets.only(left: 18, right: 12),
-                      child: SvgPicture.asset(
-                        textfieldIcon!,
-                        height: 24,
-                        width: 24,
-                        colorFilter: ColorFilter.mode(
-                          Color(0xff0864ED),
-                          BlendMode.srcIn,
-                        ),
-                      ),
-                    )
-                    : null,
+            prefixIcon: Padding(
+              padding: const EdgeInsets.only(left: 18, right: 12),
+              child: SvgPicture.asset(
+                textfieldIcon,
+                height: 24,
+                width: 24,
+                colorFilter: ColorFilter.mode(
+                  Color(0xff0864ED),
+                  BlendMode.srcIn,
+                ),
+              ),
+            ),
             contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 18),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(0),

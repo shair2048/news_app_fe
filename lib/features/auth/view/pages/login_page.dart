@@ -61,8 +61,11 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 SizedBox(height: 32),
                 CustomButton(
                   buttonLabel: 'SIGN IN',
-                  buttonLabelColor: '0xffffffff',
-                  buttonColor: '0xff0864ED',
+                  buttonLabelColor: Colors.white,
+                  buttonColor: const Color(0xff0864ED),
+                  onPressed: () {
+                    // Handle sign in action
+                  },
                 ),
                 SizedBox(height: 32),
                 const OrDivider(),
@@ -70,11 +73,21 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 CustomButton(
                   buttonLabel: 'Sign in with Google',
                   buttonIcon: 'assets/icons/google_icon.svg',
+                  buttonColor: Colors.white,
+                  buttonLabelColor: Color(0xff191F33),
+                  onPressed: () {
+                    // Handle Google sign in action
+                  },
                 ),
                 SizedBox(height: 20),
                 CustomButton(
                   buttonLabel: 'Sign in with Facebook',
                   buttonIcon: 'assets/icons/facebook_icon.svg',
+                  buttonColor: Colors.white,
+                  buttonLabelColor: Color(0xff191F33),
+                  onPressed: () {
+                    // Handle Facebook sign in action
+                  },
                 ),
                 SizedBox(height: 20),
                 AuthFooter(actionText: 'Sign Up'),
