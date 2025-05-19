@@ -153,14 +153,12 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
               const SizedBox(height: 32),
               CustomButton(
                 buttonLabel: 'CREATE ACCOUNT',
-                buttonLabelColor: '0xffffffff',
-                buttonColor: '0xff0864ED',
+                buttonLabelColor: Colors.white,
+                buttonColor: const Color(0xff0864ED),
                 onPressed: onRegisterTap, // <-- Quan trọng!
               ),
               const SizedBox(height: 32),
-              AuthFooter(
-                actionText: 'Sign in',
-              ),
+              AuthFooter(actionText: 'Sign in'),
             ],
           ),
         ),
