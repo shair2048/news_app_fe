@@ -7,7 +7,7 @@ class CustomButton extends ConsumerWidget {
   final Color buttonLabelColor;
   final String? buttonIcon;
   final Color buttonColor;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
 
   const CustomButton({
     super.key,
@@ -15,7 +15,7 @@ class CustomButton extends ConsumerWidget {
     required this.buttonLabelColor,
     this.buttonIcon,
     required this.buttonColor,
-    required this.onPressed,
+    this.onPressed,
   });
 
   @override

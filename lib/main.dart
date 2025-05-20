@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:news_app_fe/core/themes/app_theme.dart';
+// import 'package:news_app_fe/core/themes/app_theme.dart';
 import 'package:news_app_fe/features/auth/view/pages/login_page.dart';
-// import 'package:news_app_fe/features/auth/view/pages/register_page.dart';
+import 'package:news_app_fe/features/auth/view/pages/register_page.dart';
 
 // final helloWorldProvider = Provider((_) => 'Hello world');
 

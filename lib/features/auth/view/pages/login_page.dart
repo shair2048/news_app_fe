@@ -6,6 +6,7 @@ import 'package:news_app_fe/features/auth/view/widgets/auth_footer.dart';
 import 'package:news_app_fe/features/auth/view/widgets/custom_button.dart';
 import 'package:news_app_fe/features/auth/view/widgets/form_text_field.dart';
 import 'package:news_app_fe/features/auth/view/widgets/or_divider.dart';
+import 'package:news_app_fe/features/auth/viewmodel/login_provider.dart';
 
 class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});
@@ -17,6 +18,12 @@ class LoginPage extends ConsumerStatefulWidget {
 class _LoginPageState extends ConsumerState<LoginPage> {
   @override
   Widget build(BuildContext context) {
+    final state = ref.watch(loginProvider);
+    final notifier = ref.read(loginProvider.notifier);
+
+    final emailController = TextEditingController();
+    final passwordController = TextEditingController();
+
     return Scaffold(
       appBar: CustomAppBar(),
       backgroundColor: Colors.white,
@@ -48,24 +55,52 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 ),
                 SizedBox(height: 32),
                 FormTextField(
+                  // controller: emailController,
+                  textOnChanged: (value) => notifier.setEmail(value),
                   textfieldLabel: 'Email',
                   textfieldHint: 'Email address',
                   textfieldIcon: 'assets/icons/email.svg',
                 ),
                 SizedBox(height: 18),
                 FormTextField(
+                  // controller: emailController,
+                  textOnChanged: (value) => notifier.setPassword(value),
                   textfieldLabel: 'Password',
                   textfieldHint: 'Password',
                   textfieldIcon: 'assets/icons/lock.svg',
+                  obscureText: true,
                 ),
                 SizedBox(height: 32),
                 CustomButton(
                   buttonLabel: 'SIGN IN',
                   buttonLabelColor: Colors.white,
                   buttonColor: const Color(0xff0864ED),
-                  onPressed: () {
-                    // Handle sign in action
-                  },
+                  onPressed:
+                      state.isValid
+                          ? () {
+                            final emailValid = state.isEmailValid;
+                            final passwordValid = state.isPasswordValid;
+                            if (!emailValid) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(content: Text('Invalid email!')),
+                              );
+
+                              // emailController.clear();
+                              return;
+                            }
+
+                            if (!passwordValid) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text('Invalid password!'),
+                                ),
+                              );
+
+                              // passwordController.clear();
+                              return;
+                            }
+                          }
+                          : null,
                 ),
                 SizedBox(height: 32),
                 const OrDivider(),
