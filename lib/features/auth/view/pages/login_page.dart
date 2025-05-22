@@ -6,7 +6,7 @@ import 'package:news_app_fe/features/auth/view/widgets/auth_footer.dart';
 import 'package:news_app_fe/features/auth/view/widgets/custom_button.dart';
 import 'package:news_app_fe/features/auth/view/widgets/form_text_field.dart';
 import 'package:news_app_fe/features/auth/view/widgets/or_divider.dart';
-import 'package:news_app_fe/features/auth/viewmodel/login_provider.dart';
+import 'package:news_app_fe/features/auth/viewmodel/login_viewmodel.dart';
 
 class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});
@@ -16,13 +16,24 @@ class LoginPage extends ConsumerStatefulWidget {
 }
 
 class _LoginPageState extends ConsumerState<LoginPage> {
+  // final emailController = TextEditingController();
+  // final passwordController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+
+    Future.microtask(() {
+      ref.read(loginProvider.notifier).reset();
+      // emailController.clear();
+      // passwordController.clear();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(loginProvider);
     final notifier = ref.read(loginProvider.notifier);
-
-    final emailController = TextEditingController();
-    final passwordController = TextEditingController();
 
     return Scaffold(
       appBar: CustomAppBar(),
@@ -63,7 +74,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 ),
                 SizedBox(height: 18),
                 FormTextField(
-                  // controller: emailController,
+                  // controller: passwordController,
                   textOnChanged: (value) => notifier.setPassword(value),
                   textfieldLabel: 'Password',
                   textfieldHint: 'Password',
@@ -84,8 +95,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(content: Text('Invalid email!')),
                               );
-
                               // emailController.clear();
+
                               return;
                             }
 

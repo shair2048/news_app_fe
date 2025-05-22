@@ -1,6 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:news_app_fe/features/auth/viewmodel/login_state.dart';
 
+final loginProvider = StateNotifierProvider<LoginViewModel, LoginState>(
+  (ref) => LoginViewModel(),
+);
+
 class LoginViewModel extends StateNotifier<LoginState> {
   LoginViewModel() : super(LoginState());
 
@@ -10,5 +14,9 @@ class LoginViewModel extends StateNotifier<LoginState> {
 
   void setPassword(String password) {
     state = state.copyWith(password: password);
+  }
+
+  void reset() {
+    state = LoginState.initial();
   }
 }
