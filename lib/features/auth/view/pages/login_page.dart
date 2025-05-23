@@ -89,8 +89,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   onPressed:
                       state.isValid
                           ? () {
-                            final emailValid = state.isEmailValid;
-                            final passwordValid = state.isPasswordValid;
+                            final emailValid = notifier.isEmailValid;
+                            final passwordValid = notifier.isPasswordValid;
                             if (!emailValid) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(content: Text('Invalid email!')),
