@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:news_app_fe/core/widgets/custom_app_bar.dart';
 import 'package:news_app_fe/features/auth/view/widgets/auth_footer.dart';
 import 'package:news_app_fe/features/auth/view/widgets/custom_button.dart';
@@ -158,7 +159,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                 onPressed: onRegisterTap, // <-- Quan trọng!
               ),
               const SizedBox(height: 32),
-              AuthFooter(actionText: 'Sign in'),
+              AuthFooter(actionText: 'Sign in', onTap: () => context.go('/')),
             ],
           ),
         ),

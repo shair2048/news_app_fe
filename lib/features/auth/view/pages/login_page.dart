@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 // import 'package:flutter_svg/svg.dart';
 import 'package:news_app_fe/core/widgets/custom_app_bar.dart';
 import 'package:news_app_fe/features/auth/view/widgets/auth_footer.dart';
@@ -136,7 +137,10 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   },
                 ),
                 SizedBox(height: 20),
-                AuthFooter(actionText: 'Sign Up'),
+                AuthFooter(
+                  actionText: 'Sign Up',
+                  onTap: () => context.go('/register'),
+                ),
               ],
             ),
           ),

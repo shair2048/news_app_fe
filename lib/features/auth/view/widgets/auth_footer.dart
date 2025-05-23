@@ -3,9 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AuthFooter extends ConsumerWidget {
   final String actionText;
-  final VoidCallback? onTap;
+  final VoidCallback onTap;
 
-  const AuthFooter({super.key, required this.actionText, this.onTap});
+  const AuthFooter({super.key, required this.actionText, required this.onTap});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -20,8 +20,8 @@ class AuthFooter extends ConsumerWidget {
             fontFamily: 'Inter',
             fontWeight: FontWeight.w500,
           ),
+
           children: [
-            const TextSpan(text: ''),
             WidgetSpan(
               alignment: PlaceholderAlignment.baseline,
               baseline: TextBaseline.alphabetic,
@@ -34,7 +34,6 @@ class AuthFooter extends ConsumerWidget {
                     fontSize: 11,
                     fontFamily: 'Inter',
                     fontWeight: FontWeight.w500,
-                    // decoration: TextDecoration.underline,
                   ),
                 ),
               ),
