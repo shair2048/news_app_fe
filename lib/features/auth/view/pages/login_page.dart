@@ -36,6 +36,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     final state = ref.watch(loginProvider);
     final notifier = ref.read(loginProvider.notifier);
 
+    print("emailError = ${state.emailError}");
+    print("passwordError = ${state.passwordError}");
+
     return Scaffold(
       appBar: CustomAppBar(),
       backgroundColor: Colors.white,
@@ -69,6 +72,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 FormTextField(
                   // controller: emailController,
                   textOnChanged: (value) => notifier.setEmail(value),
+                  errorMessage: state.emailError,
                   textfieldLabel: 'Email',
                   textfieldHint: 'Email address',
                   textfieldIcon: 'assets/icons/email.svg',
@@ -77,6 +81,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 FormTextField(
                   // controller: passwordController,
                   textOnChanged: (value) => notifier.setPassword(value),
+                  errorMessage: state.passwordError,
                   textfieldLabel: 'Password',
                   textfieldHint: 'Password',
                   textfieldIcon: 'assets/icons/lock.svg',
@@ -90,27 +95,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   onPressed:
                       state.isValid
                           ? () {
-                            final emailValid = notifier.isEmailValid;
-                            final passwordValid = notifier.isPasswordValid;
-                            if (!emailValid) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(content: Text('Invalid email!')),
-                              );
-                              // emailController.clear();
-
-                              return;
-                            }
-
-                            if (!passwordValid) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text('Invalid password!'),
-                                ),
-                              );
-
-                              // passwordController.clear();
-                              return;
-                            }
+                            notifier.submit();
                           }
                           : null,
                 ),

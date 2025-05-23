@@ -9,18 +9,28 @@ final loginProvider = StateNotifierProvider<LoginViewModel, LoginState>(
 class LoginViewModel extends StateNotifier<LoginState> {
   LoginViewModel() : super(LoginState());
 
+  bool get isEmailValid => Validators.isValidEmail(state.email);
+  bool get isPasswordValid => Validators.isValidPassword(state.password);
+
   void setEmail(String email) {
-    state = state.copyWith(email: email);
+    final isValidEmail = Validators.isValidEmail(email);
+    state = state.copyWith(
+      email: email,
+      emailError: isValidEmail ? null : 'Invalid email',
+    );
   }
 
   void setPassword(String password) {
-    state = state.copyWith(password: password);
+    final isValidPassword = Validators.isValidPassword(password);
+    state = state.copyWith(
+      password: password,
+      passwordError: isValidPassword ? null : 'Invalid password',
+    );
   }
 
   void reset() {
     state = LoginState.initial();
   }
 
-  bool get isEmailValid => Validators.isValidEmail(state.email);
-  bool get isPasswordValid => Validators.isValidPassword(state.password);
+  void submit() {}
 }
