@@ -9,6 +9,8 @@ class FormTextField extends ConsumerWidget {
   final TextEditingController? controller;
   final FormFieldValidator<String>? validator;
   final bool obscureText;
+  final Function(String)? textOnChanged;
+  final String? errorMessage;
 
   const FormTextField({
     super.key,
@@ -18,6 +20,8 @@ class FormTextField extends ConsumerWidget {
     required this.textfieldHint,
     required this.textfieldIcon,
     this.obscureText = false,
+    this.textOnChanged,
+    this.errorMessage,
   });
 
   @override
@@ -36,6 +40,7 @@ class FormTextField extends ConsumerWidget {
         ),
         SizedBox(height: 8),
         TextFormField(
+          onChanged: textOnChanged,
           controller: controller,
           validator: validator,
           obscureText: obscureText,
@@ -47,6 +52,7 @@ class FormTextField extends ConsumerWidget {
               fontFamily: 'Inter',
               fontWeight: FontWeight.w400,
             ),
+            errorText: errorMessage,
             prefixIcon: Padding(
               padding: const EdgeInsets.only(left: 18, right: 12),
               child: SvgPicture.asset(

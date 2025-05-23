@@ -41,4 +41,6 @@ class RegisterState {
       confirmPasswordError: confirmPasswordError,
     );
   }
+
+  bool get isValid => email.trim().isNotEmpty && password.trim().isNotEmpty;
 }
