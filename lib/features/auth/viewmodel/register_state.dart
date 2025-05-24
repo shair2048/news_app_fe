@@ -4,7 +4,6 @@ class RegisterState {
   final String password;
   final String confirmPassword;
 
-  final String? fullNameError;
   final String? emailError;
   final String? passwordError;
   final String? confirmPasswordError;
@@ -14,7 +13,6 @@ class RegisterState {
     this.email = '',
     this.password = '',
     this.confirmPassword = '',
-    this.fullNameError,
     this.emailError,
     this.passwordError,
     this.confirmPasswordError,
@@ -25,7 +23,6 @@ class RegisterState {
     String? email,
     String? password,
     String? confirmPassword,
-    String? fullNameError,
     String? emailError,
     String? passwordError,
     String? confirmPasswordError,
@@ -35,12 +32,25 @@ class RegisterState {
       email: email ?? this.email,
       password: password ?? this.password,
       confirmPassword: confirmPassword ?? this.confirmPassword,
-      fullNameError: fullNameError,
       emailError: emailError,
       passwordError: passwordError,
       confirmPasswordError: confirmPasswordError,
     );
   }
 
-  bool get isValid => email.trim().isNotEmpty && password.trim().isNotEmpty;
+  // initial values
+  factory RegisterState.initial() {
+    return RegisterState(
+      fullName: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
+    );
+  }
+
+  bool get isValid =>
+      fullName.trim().isNotEmpty &&
+      email.trim().isNotEmpty &&
+      password.trim().isNotEmpty &&
+      confirmPassword.trim().isNotEmpty;
 }

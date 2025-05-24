@@ -2,10 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AuthFooter extends ConsumerWidget {
+  final String textContent;
   final String actionText;
   final VoidCallback onTap;
 
-  const AuthFooter({super.key, required this.actionText, required this.onTap});
+  const AuthFooter({
+    super.key,
+    required this.textContent,
+    required this.actionText,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -13,7 +19,7 @@ class AuthFooter extends ConsumerWidget {
       child: RichText(
         textAlign: TextAlign.center,
         text: TextSpan(
-          text: 'Don\'t have an account? ',
+          text: textContent,
           style: TextStyle(
             color: Color(0xff767E94),
             fontSize: 11,

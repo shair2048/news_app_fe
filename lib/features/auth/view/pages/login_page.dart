@@ -39,94 +39,91 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     return Scaffold(
       appBar: CustomAppBar(),
       backgroundColor: Colors.white,
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(20, 40, 20, 0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'WELCOME BACK!',
-                  style: TextStyle(
-                    color: Color(0xff767E94),
-                    fontSize: 12,
-                    fontFamily: 'Nunito',
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                SizedBox(height: 8),
-                Text(
-                  'Login',
-                  style: TextStyle(
-                    color: Color(0xff191F33),
-                    fontSize: 32,
-                    fontFamily: 'Nunito',
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                SizedBox(height: 32),
-                FormTextField(
-                  // controller: emailController,
-                  textOnChanged: (value) => notifier.setEmail(value),
-                  errorMessage: state.emailError,
-                  textfieldLabel: 'Email',
-                  textfieldHint: 'Email address',
-                  textfieldIcon: 'assets/icons/email.svg',
-                ),
-                SizedBox(height: 18),
-                FormTextField(
-                  // controller: passwordController,
-                  textOnChanged: (value) => notifier.setPassword(value),
-                  errorMessage: state.passwordError,
-                  textfieldLabel: 'Password',
-                  textfieldHint: 'Password',
-                  textfieldIcon: 'assets/icons/lock.svg',
-                  obscureText: true,
-                ),
-                SizedBox(height: 32),
-                CustomButton(
-                  buttonLabel: 'SIGN IN',
-                  buttonLabelColor: Colors.white,
-                  buttonColor: const Color(0xff0864ED),
-                  onPressed:
-                      state.isValid
-                          ? () {
-                            notifier.submit();
-                          }
-                          : null,
-                ),
-                SizedBox(height: 32),
-                const OrDivider(),
-                SizedBox(height: 32),
-                CustomButton(
-                  buttonLabel: 'Sign in with Google',
-                  buttonIcon: 'assets/icons/google_icon.svg',
-                  buttonColor: Colors.white,
-                  buttonLabelColor: Color(0xff191F33),
-                  onPressed: () {
-                    // Handle Google sign in action
-                  },
-                ),
-                SizedBox(height: 20),
-                CustomButton(
-                  buttonLabel: 'Sign in with Facebook',
-                  buttonIcon: 'assets/icons/facebook_icon.svg',
-                  buttonColor: Colors.white,
-                  buttonLabelColor: Color(0xff191F33),
-                  onPressed: () {
-                    // Handle Facebook sign in action
-                  },
-                ),
-                SizedBox(height: 20),
-                AuthFooter(
-                  actionText: 'Sign Up',
-                  onTap: () => context.go('/register'),
-                ),
-              ],
+      body: Padding(
+        padding: const EdgeInsets.fromLTRB(20, 40, 20, 0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'WELCOME BACK!',
+              style: TextStyle(
+                color: Color(0xff767E94),
+                fontSize: 12,
+                fontFamily: 'Nunito',
+                fontWeight: FontWeight.w600,
+              ),
             ),
-          ),
-        ],
+            SizedBox(height: 8),
+            Text(
+              'Login',
+              style: TextStyle(
+                color: Color(0xff191F33),
+                fontSize: 32,
+                fontFamily: 'Nunito',
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            SizedBox(height: 32),
+            FormTextField(
+              // controller: emailController,
+              textOnChanged: (value) => notifier.setEmail(value),
+              errorMessage: state.emailError,
+              textfieldLabel: 'Email',
+              textfieldHint: 'Email address',
+              textfieldIcon: 'assets/icons/email.svg',
+            ),
+            SizedBox(height: 18),
+            FormTextField(
+              // controller: passwordController,
+              textOnChanged: (value) => notifier.setPassword(value),
+              errorMessage: state.passwordError,
+              textfieldLabel: 'Password',
+              textfieldHint: 'Password',
+              textfieldIcon: 'assets/icons/lock.svg',
+              obscureText: true,
+            ),
+            SizedBox(height: 32),
+            CustomButton(
+              buttonLabel: 'SIGN IN',
+              buttonLabelColor: Colors.white,
+              buttonColor: const Color(0xff0864ED),
+              onPressed:
+                  state.isValid
+                      ? () {
+                        notifier.submit();
+                      }
+                      : null,
+            ),
+            SizedBox(height: 32),
+            const OrDivider(),
+            SizedBox(height: 32),
+            CustomButton(
+              buttonLabel: 'Sign in with Google',
+              buttonIcon: 'assets/icons/google_icon.svg',
+              buttonColor: Colors.white,
+              buttonLabelColor: Color(0xff191F33),
+              onPressed: () {
+                // Handle Google sign in action
+              },
+            ),
+            SizedBox(height: 20),
+            CustomButton(
+              buttonLabel: 'Sign in with Facebook',
+              buttonIcon: 'assets/icons/facebook_icon.svg',
+              buttonColor: Colors.white,
+              buttonLabelColor: Color(0xff191F33),
+              onPressed: () {
+                // Handle Facebook sign in action
+              },
+            ),
+            SizedBox(height: 20),
+            AuthFooter(
+              textContent: 'Don\'t have an account? ',
+              actionText: 'Sign Up',
+              onTap: () => context.go('/register'),
+            ),
+          ],
+        ),
       ),
     );
   }
