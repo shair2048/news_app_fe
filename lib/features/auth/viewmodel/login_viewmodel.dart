@@ -9,8 +9,8 @@ final loginProvider = StateNotifierProvider<LoginViewModel, LoginState>(
 class LoginViewModel extends StateNotifier<LoginState> {
   LoginViewModel() : super(LoginState());
 
-  bool get isEmailValid => Validators.isValidEmail(state.email);
-  bool get isPasswordValid => Validators.isValidPassword(state.password);
+  // bool get isEmailValid => Validators.isValidEmail(state.email);
+  // bool get isPasswordValid => Validators.isValidPassword(state.password);
 
   void setEmail(String email) {
     final isValidEmail = Validators.isValidEmail(email);
