@@ -36,9 +36,6 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     final state = ref.watch(loginProvider);
     final notifier = ref.read(loginProvider.notifier);
 
-    print("emailError = ${state.emailError}");
-    print("passwordError = ${state.passwordError}");
-
     return Scaffold(
       appBar: CustomAppBar(),
       backgroundColor: Colors.white,
