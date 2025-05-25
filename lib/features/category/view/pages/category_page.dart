@@ -1,20 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:news_app_fe/core/widgets/custom_app_bar.dart';
+import 'package:news_app_fe/core/widgets/custom_nav_bar.dart';
+import '../../viewmodel/category_viewmodel.dart';
+import '../widgets/category_item.dart';
 
-class CategoryPage extends ConsumerStatefulWidget {
+class CategoryPage extends ConsumerWidget {
   const CategoryPage({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _CategoryPageState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final categories = ref.watch(categoryProvider);
 
-class _CategoryPageState extends ConsumerState<CategoryPage> {
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(appBarTitle: 'Category'),
-      body: Center(child: Text('Category Page')),
+      appBar: const CustomAppBar(appBarTitle: 'All Category'),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: GridView.count(
+          crossAxisCount: 2,
+          childAspectRatio: 1.75,
+          mainAxisSpacing: 10,
+          crossAxisSpacing: 10,
+          physics: const NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          children: categories
+              .map((category) => CategoryItem(category: category))
+              .toList(),
+        ),
+      ),
     );
   }
 }
