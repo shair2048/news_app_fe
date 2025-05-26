@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:news_app_fe/core/widgets/custom_app_bar.dart';
-import 'package:news_app_fe/core/widgets/custom_nav_bar.dart';
 import '../../viewmodel/category_viewmodel.dart';
 import '../widgets/category_item.dart';
 
@@ -21,11 +20,12 @@ class CategoryPage extends ConsumerWidget {
           childAspectRatio: 1.75,
           mainAxisSpacing: 10,
           crossAxisSpacing: 10,
-          physics: const NeverScrollableScrollPhysics(),
+          physics: const AlwaysScrollableScrollPhysics(),
           shrinkWrap: true,
-          children: categories
-              .map((category) => CategoryItem(category: category))
-              .toList(),
+          children:
+              categories
+                  .map((category) => CategoryItem(category: category))
+                  .toList(),
         ),
       ),
     );
