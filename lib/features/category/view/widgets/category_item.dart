@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../model/category_model.dart';
+import 'package:logging/logging.dart';
+
+final log = Logger('CategoryItem');
 
 class CategoryItem extends StatefulWidget {
   final Category category;
@@ -24,13 +27,9 @@ class _CategoryItemState extends State<CategoryItem>
       duration: const Duration(milliseconds: 150),
       vsync: this,
     );
-    _scaleAnimation = Tween<double>(
-      begin: 1.0,
-      end: 0.95,
-    ).animate(CurvedAnimation(
-      parent: _animationController,
-      curve: Curves.easeInOut,
-    ));
+    _scaleAnimation = Tween<double>(begin: 1.0, end: 0.95).animate(
+      CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
+    );
   }
 
   @override
@@ -55,8 +54,7 @@ class _CategoryItemState extends State<CategoryItem>
   }
 
   void _handleTap() {
-    // TODO: Navigate to category detail page
-    print('Tapped on ${widget.category.title}');
+    log.info('Tapped on ${widget.category.title}');
 
     // Haptic feedback for better UX
     // HapticFeedback.lightImpact();
@@ -77,25 +75,11 @@ class _CategoryItemState extends State<CategoryItem>
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 150),
               decoration: BoxDecoration(
-                color: _isPressed
-                    ? widget.category.backgroundColor.withOpacity(0.8)
-                    : widget.category.backgroundColor,
-                borderRadius: BorderRadius.circular(16),
-                boxShadow: _isPressed
-                    ? [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
-                    blurRadius: 8,
-                    offset: const Offset(0, 4),
-                  )
-                ]
-                    : [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.05),
-                    blurRadius: 4,
-                    offset: const Offset(0, 2),
-                  )
-                ],
+                color:
+                    _isPressed
+                        ? widget.category.backgroundColor.withValues(alpha: 10)
+                        : widget.category.backgroundColor,
+                borderRadius: BorderRadius.circular(0),
               ),
               padding: const EdgeInsets.all(12),
               child: Column(
@@ -114,7 +98,8 @@ class _CategoryItemState extends State<CategoryItem>
                     duration: const Duration(milliseconds: 150),
                     style: TextStyle(
                       fontFamily: 'Nunito',
-                      fontWeight: _isPressed ? FontWeight.w600 : FontWeight.w400,
+                      fontWeight:
+                          _isPressed ? FontWeight.w600 : FontWeight.w400,
                       fontSize: 14,
                       color: _isPressed ? Colors.black87 : Colors.black54,
                     ),

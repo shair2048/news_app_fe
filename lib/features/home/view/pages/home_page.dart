@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:news_app_fe/core/widgets/custom_app_bar.dart';
-import 'package:news_app_fe/core/widgets/custom_nav_bar.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
