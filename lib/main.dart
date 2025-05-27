@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:news_app_fe/core/widgets/custom_nav_bar.dart';
@@ -10,18 +11,25 @@ import 'package:news_app_fe/features/category/view/pages/category_page.dart';
 import 'package:news_app_fe/features/home/view/pages/home_page.dart';
 import 'package:news_app_fe/features/profile/view/pages/profile_page.dart';
 import 'package:news_app_fe/features/search/view/pages/search_page.dart';
+import 'package:logging/logging.dart';
 
 void main() {
+  Logger.root.level = Level.ALL; // defaults to Level.INFO
+  Logger.root.onRecord.listen((record) {
+    if (kDebugMode) {
+      // Log to console in debug mode
+      print('${record.level.name}: ${record.time}: ${record.message}');
+    }
+  });
+
   runApp(ProviderScope(child: NewsApp()));
 }
 
 /// The route configuration.
 final GoRouter _router = GoRouter(
-  initialLocation: '/category',
+  initialLocation: '/register',
   routes: <RouteBase>[
-    GoRoute(path: '/login', builder: (context, state) => const LoginPage(
-
-    )),
+    GoRoute(path: '/login', builder: (context, state) => const LoginPage()),
     GoRoute(
       path: '/register',
       builder: (context, state) => const RegisterPage(),
