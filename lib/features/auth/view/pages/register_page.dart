@@ -107,6 +107,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                       state.isValid
                           ? () {
                             notifier.submit();
+                            context.go('/login');
                           }
                           : null,
                 ),
