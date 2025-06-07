@@ -17,7 +17,7 @@ void main() {
 
 /// The route configuration.
 final GoRouter _router = GoRouter(
-  initialLocation: '/category',
+  initialLocation: '/profile',
   routes: <RouteBase>[
     GoRoute(path: '/login', builder: (context, state) => const LoginPage(
 
