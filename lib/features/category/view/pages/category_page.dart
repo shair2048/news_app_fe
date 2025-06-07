@@ -22,9 +22,10 @@ class CategoryPage extends ConsumerWidget {
           crossAxisSpacing: 10,
           physics: const AlwaysScrollableScrollPhysics(),
           shrinkWrap: true,
-          children: categories
-              .map((category) => CategoryItem(category: category))
-              .toList(),
+          children:
+              categories
+                  .map((category) => CategoryItem(category: category))
+                  .toList(),
         ),
       ),
     );
