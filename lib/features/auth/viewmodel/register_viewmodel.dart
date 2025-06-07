@@ -1,14 +1,24 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logging/logging.dart';
 import 'package:news_app_fe/core/utils/validators.dart';
+import 'package:news_app_fe/features/auth/model/repositories/auth_repository.dart';
+import 'package:news_app_fe/features/auth/model/services/api_service.dart';
 import 'package:news_app_fe/features/auth/viewmodel/register_state.dart';
 
 final registerProvider =
     StateNotifierProvider<RegisterViewModel, RegisterState>(
-      (ref) => RegisterViewModel(),
+      (ref) => RegisterViewModel(ref),
     );
 
+final apiServiceProvider = Provider<ApiService>((ref) => ApiService());
+final authRepositoryProvider = Provider<AuthRepository>(
+  (ref) => AuthRepository(ref.read(apiServiceProvider)),
+);
+final log = Logger('RegisterViewModel');
+
 class RegisterViewModel extends StateNotifier<RegisterState> {
-  RegisterViewModel() : super(const RegisterState());
+  final Ref ref;
+  RegisterViewModel(this.ref) : super(const RegisterState());
 
   void setFullName(String fullname) {
     state = state.copyWith(fullName: fullname);
@@ -43,5 +53,18 @@ class RegisterViewModel extends StateNotifier<RegisterState> {
     state = RegisterState.initial();
   }
 
-  void submit() {}
+  Future<void> submit() async {
+    final repo = ref.read(authRepositoryProvider);
+
+    try {
+      await repo.register(
+        fullName: state.fullName,
+        email: state.email,
+        password: state.password,
+        confirmPassword: state.confirmPassword,
+      );
+    } catch (error) {
+      throw Exception('Registration failed: $error');
+    }
+  }
 }

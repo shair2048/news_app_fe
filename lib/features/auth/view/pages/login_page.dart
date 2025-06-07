@@ -91,6 +91,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   state.isValid
                       ? () {
                         notifier.submit();
+                        context.go('/home');
                       }
                       : null,
             ),
