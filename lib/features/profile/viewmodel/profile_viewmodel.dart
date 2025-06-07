@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:news_app_fe/features/profile/viewmodel/profile_state.dart';
 import '../model/profile_model.dart';
+
+final profileProvider = StateNotifierProvider<ProfileViewmodel, ProfileState>(
+  (ref) => ProfileViewmodel(),
+);
 
 class ProfileViewmodel extends StateNotifier<ProfileState> {
   ProfileViewmodel() : super(ProfileState());
@@ -11,12 +16,10 @@ class ProfileViewmodel extends StateNotifier<ProfileState> {
   }
 
   void navigateToEditProfile(BuildContext context) {
-    print('Navigate to Edit Profile');
     // context.push('/edit-profile');
   }
 
   void navigateToMyArticle(BuildContext context) {
-    print('Navigate to My Articles');
     // context.push('/my-articles');
   }
 
@@ -25,8 +28,7 @@ class ProfileViewmodel extends StateNotifier<ProfileState> {
   }
 
   void logout(BuildContext context) {
-    print('User logged out');
-    context.go('/login');
+    context.go('/home');
   }
 
   List<ProfileMenuItem> getMenuItems(BuildContext context) {
@@ -61,34 +63,3 @@ class ProfileViewmodel extends StateNotifier<ProfileState> {
     ];
   }
 }
-
-class ProfileState {
-  final ProfileUser user;
-  final bool isDarkMode;
-  final bool isLoading;
-
-  ProfileState({
-    ProfileUser? user,
-    this.isDarkMode = false,
-    this.isLoading = false,
-  }) : user = user ?? ProfileUser(
-    name: 'Tinsh',
-    email: 'tinsh@gmail.com',
-  );
-
-  ProfileState copyWith({
-    ProfileUser? user,
-    bool? isDarkMode,
-    bool? isLoading,
-  }) {
-    return ProfileState(
-      user: user ?? this.user,
-      isDarkMode: isDarkMode ?? this.isDarkMode,
-      isLoading: isLoading ?? this.isLoading,
-    );
-  }
-}
-
-final profileProvider = StateNotifierProvider<ProfileViewmodel, ProfileState>((ref) {
-  return ProfileViewmodel();
-});

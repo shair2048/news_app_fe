@@ -1,22 +1,13 @@
-import 'dart:ui';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class ProfileUser {
   final String name;
   final String email;
   final String? avatarUrl;
 
-  ProfileUser({
-    required this.name,
-    required this.email,
-    this.avatarUrl,
-  });
+  ProfileUser({required this.name, required this.email, this.avatarUrl});
 
-  ProfileUser copyWith({
-    String? name,
-    String? email,
-    String? avatarUrl,
-  }) {
+  ProfileUser copyWith({String? name, String? email, String? avatarUrl}) {
     return ProfileUser(
       name: name ?? this.name,
       email: email ?? this.email,

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:news_app_fe/core/widgets/custom_app_bar.dart';
 import '../../viewmodel/profile_viewmodel.dart';
-import '../widgets/profile_menu_item.dart';
+import '../widgets/profile_item.dart';
 
 class ProfilePage extends ConsumerWidget {
   const ProfilePage({super.key});
@@ -13,7 +14,7 @@ class ProfilePage extends ConsumerWidget {
     final profileViewmodel = ref.read(profileProvider.notifier);
 
     return Scaffold(
-      backgroundColor: Colors.grey.shade50,
+      backgroundColor: Colors.white,
       appBar: const CustomAppBar(appBarTitle: 'Profile'),
       body: SingleChildScrollView(
         child: Column(
@@ -21,56 +22,29 @@ class ProfilePage extends ConsumerWidget {
             // Profile Header Section
             Container(
               width: double.infinity,
-              color: Colors.white,
-              padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
+              padding: const EdgeInsets.symmetric(vertical: 30),
+              decoration: const BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(color: Color(0xffE9EAF0), width: 1),
+                ),
+              ),
               child: Column(
                 children: [
                   // Avatar
-                  Container(
-                    width: 80,
-                    height: 80,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      gradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [
-                          Colors.blue.shade400,
-                          Colors.blue.shade600,
-                        ],
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.blue.withOpacity(0.3),
-                          blurRadius: 20,
-                          offset: const Offset(0, 8),
-                        ),
-                      ],
-                    ),
-                    child: profileState.user.avatarUrl != null
-                        ? ClipRRect(
-                      borderRadius: BorderRadius.circular(40),
-                      child: Image.network(
-                        profileState.user.avatarUrl!,
-                        width: 80,
-                        height: 80,
-                        fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) {
-                          return _buildDefaultAvatar();
-                        },
-                      ),
-                    )
-                        : _buildDefaultAvatar(),
+                  SvgPicture.asset(
+                    'assets/icons/avatar.svg',
+                    width: 100,
+                    height: 100,
                   ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 10),
                   // Name
                   Text(
                     profileState.user.name,
                     style: const TextStyle(
                       fontFamily: 'Nunito',
-                      fontSize: 18,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.black87,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
+                      color: Color(0xFF191F33),
                     ),
                   ),
                   const SizedBox(height: 4),
@@ -79,69 +53,27 @@ class ProfilePage extends ConsumerWidget {
                     profileState.user.email,
                     style: TextStyle(
                       fontFamily: 'Nunito',
-                      fontSize: 14,
+                      fontSize: 12,
                       fontWeight: FontWeight.w400,
-                      color: Colors.grey.shade600,
+                      color: Color(0xFF767E94),
                     ),
                   ),
                 ],
               ),
             ),
 
-            const SizedBox(height: 24),
-
-            // Menu Items Section
-            Container(
-              width: double.infinity,
-              margin: const EdgeInsets.symmetric(horizontal: 16),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(16),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.05),
-                    blurRadius: 10,
-                    offset: const Offset(0, 2),
-                  ),
-                ],
-              ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 16),
-                child: Column(
-                  children: profileViewmodel
+            // const SizedBox(height: 24),
+            Column(
+              children:
+                  profileViewmodel
                       .getMenuItems(context)
-                      .map((menuItem) => ProfileMenuItemWidget(menuItem: menuItem))
+                      .map((menuItem) => ProfileItem(menuItem: menuItem))
                       .toList(),
-                ),
-              ),
             ),
 
             const SizedBox(height: 32),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _buildDefaultAvatar() {
-    return Container(
-      width: 80,
-      height: 80,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            Colors.grey.shade300,
-            Colors.grey.shade500,
-          ],
-        ),
-      ),
-      child: Icon(
-        Icons.person,
-        size: 40,
-        color: Colors.white,
       ),
     );
   }
