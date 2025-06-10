@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:news_app_fe/core/widgets/custom_app_bar.dart';
+import 'package:news_app_fe/core/widgets/common_app_bar.dart';
 import '../../viewmodel/category_viewmodel.dart';
 import '../widgets/category_item.dart';
 
@@ -12,7 +12,7 @@ class CategoryPage extends ConsumerWidget {
     final categories = ref.watch(categoryProvider);
 
     return Scaffold(
-      appBar: const CustomAppBar(appBarTitle: 'All Category'),
+      appBar: const CommonAppBar(appBarTitle: 'All Category'),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: GridView.count(

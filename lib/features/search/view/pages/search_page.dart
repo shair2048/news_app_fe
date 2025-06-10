@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:news_app_fe/core/widgets/custom_app_bar.dart';
+import 'package:news_app_fe/core/widgets/common_app_bar.dart';
 
 class SearchPage extends ConsumerStatefulWidget {
   const SearchPage({super.key});
@@ -13,7 +13,7 @@ class _SearchPageState extends ConsumerState<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(appBarTitle: 'Search'),
+      appBar: CommonAppBar(appBarTitle: 'Search'),
       body: Center(child: Text('Search Page')),
     );
   }
