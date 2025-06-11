@@ -4,8 +4,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:news_app_fe/features/home/viewmodel/top_category_viewmodel.dart';
 
-List<String> items = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'];
-
 class TopCategory extends ConsumerWidget {
   const TopCategory({super.key});
 
@@ -69,14 +67,14 @@ class TopCategory extends ConsumerWidget {
           height: 92,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            itemCount: items.length,
+            itemCount: topCategories.length,
             itemBuilder: (context, index) {
               final category = topCategories[index];
               return Container(
                 width: 180,
                 margin: EdgeInsets.only(
                   left: index == 0 ? 0 : 6,
-                  right: index == items.length - 1 ? 0 : 6,
+                  right: index == topCategories.length - 1 ? 0 : 6,
                 ),
                 decoration: BoxDecoration(
                   color: category.backgroundColor,
