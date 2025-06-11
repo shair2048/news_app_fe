@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:news_app_fe/features/home/viewmodel/top_category_viewmodel.dart';
 
 List<String> items = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'];
 
@@ -8,17 +11,58 @@ class TopCategory extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final topCategories = ref.watch(topCategoryProvider);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          'TOP CATEGORY',
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-            color: Color(0xff191F33),
-            fontFamily: 'Nunito',
-          ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const Text(
+              'TOP CATEGORY',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                color: Color(0xff191F33),
+                fontFamily: 'Nunito',
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                context.go('/category');
+              },
+              style: TextButton.styleFrom(
+                padding: EdgeInsets.zero,
+                minimumSize: Size.zero,
+                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Text(
+                    'View all',
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xff0864ED),
+                      fontFamily: 'Nunito',
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  SvgPicture.asset(
+                    'assets/icons/arrow_right.svg',
+                    width: 16,
+                    height: 16,
+                    colorFilter: const ColorFilter.mode(
+                      Color(0xff0864ED),
+                      BlendMode.srcIn,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
         const SizedBox(height: 10),
         SizedBox(
@@ -27,6 +71,7 @@ class TopCategory extends ConsumerWidget {
             scrollDirection: Axis.horizontal,
             itemCount: items.length,
             itemBuilder: (context, index) {
+              final category = topCategories[index];
               return Container(
                 width: 180,
                 margin: EdgeInsets.only(
@@ -34,19 +79,37 @@ class TopCategory extends ConsumerWidget {
                   right: index == items.length - 1 ? 0 : 6,
                 ),
                 decoration: BoxDecoration(
-                  color: Colors.blueAccent,
+                  color: category.backgroundColor,
                   borderRadius: BorderRadius.circular(4),
                 ),
                 child: InkWell(
                   onTap: () {
                     // Handle item tap
                   },
-
-                  child: Center(
-                    child: Text(
-                      items[index],
-                      style: TextStyle(color: Colors.white),
-                      textAlign: TextAlign.center,
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SvgPicture.asset(
+                          category.iconPath,
+                          width: 24,
+                          height: 24,
+                        ),
+                        SizedBox(height: 16),
+                        Text(
+                          category.title,
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                            color: Color(0xff191F33),
+                            fontFamily: 'Nunito',
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
                     ),
                   ),
                 ),
