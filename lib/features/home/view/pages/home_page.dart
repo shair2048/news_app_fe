@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:news_app_fe/features/home/view/widgets/latest_news.dart';
 import 'package:news_app_fe/features/home/view/widgets/most_read.dart';
 import 'package:news_app_fe/features/home/view/widgets/search_app_bar.dart';
 import 'package:news_app_fe/features/home/view/widgets/top_category.dart';
@@ -11,6 +12,8 @@ class HomePage extends ConsumerStatefulWidget {
   ConsumerState<ConsumerStatefulWidget> createState() => _HomePageState();
 }
 
+List<String> items = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'];
+
 class _HomePageState extends ConsumerState<HomePage> {
   @override
   Widget build(BuildContext context) {
@@ -19,11 +22,11 @@ class _HomePageState extends ConsumerState<HomePage> {
       body: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
         children: [
-          Text('TOP CATEGORY'),
-          const SizedBox(height: 16.0),
-          Text('MOST READ'),
-          const SizedBox(height: 16.0),
-          // Add more widgets here as needed
+          TopCategory(),
+          const SizedBox(height: 32),
+          MostRead(),
+          const SizedBox(height: 32),
+          LatestNews(),
         ],
       ),
     );

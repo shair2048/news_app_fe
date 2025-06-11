@@ -1,21 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-List<String> items = [
-  'Item 1',
-  'Item 2',
-  'Item 3',
-  'Item 4',
-  'Item 5',
-  'Item 6',
-  'Item 7',
-  'Item 8',
-  'Item 9',
-  'Item 10',
-];
+List<String> items = ['Item 1', 'Item 2', 'Item 3'];
 
-class MostRead extends ConsumerWidget {
-  const MostRead({super.key});
+class LatestNews extends ConsumerWidget {
+  const LatestNews({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -23,7 +12,7 @@ class MostRead extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text(
-          'MOST READ',
+          'LATEST NEWS',
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w600,

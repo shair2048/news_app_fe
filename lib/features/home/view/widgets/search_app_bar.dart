@@ -28,7 +28,12 @@ class SearchAppBar extends ConsumerWidget implements PreferredSizeWidget {
         child: TextField(
           decoration: InputDecoration(
             hintText: 'Search news...',
-            hintStyle: const TextStyle(color: Color(0xFF767E94)),
+            hintStyle: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w400,
+              fontFamily: 'Inter',
+              color: Color(0xFF767E94),
+            ),
             prefixIcon: Padding(
               padding: const EdgeInsets.all(13),
               child: SvgPicture.asset(
