@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 class ApiService {
   final Dio _dio = Dio(
     BaseOptions(
-      baseUrl: 'http://10.0.2.2:3000/api/auth',
+      baseUrl: 'http://10.0.2.2:3000/api/',
       connectTimeout: const Duration(seconds: 10),
       receiveTimeout: const Duration(seconds: 10),
       headers: {'Content-Type': 'application/json'},
@@ -18,5 +18,5 @@ class ApiService {
     return await _dio.post(endpoint, data: data);
   }
 
-  // Thêm các method khác nếu cần: put, delete...
+  // put, delete...
 }
