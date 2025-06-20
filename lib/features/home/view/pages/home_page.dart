@@ -12,8 +12,6 @@ class HomePage extends ConsumerStatefulWidget {
   ConsumerState<ConsumerStatefulWidget> createState() => _HomePageState();
 }
 
-List<String> items = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'];
-
 class _HomePageState extends ConsumerState<HomePage> {
   @override
   Widget build(BuildContext context) {
