@@ -24,7 +24,7 @@ class MostRead extends ConsumerWidget {
                   fontFamily: 'Nunito',
                 ),
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 16),
               ...List.generate(mostReadItems.length, (index) {
                 final mostRead = mostReadItems[index];
                 return Container(
@@ -113,6 +113,32 @@ class MostRead extends ConsumerWidget {
                   ),
                 );
               }),
+              const SizedBox(height: 18),
+              SizedBox(
+                width: double.infinity,
+                height: 48,
+                child: ElevatedButton.icon(
+                  onPressed: () {
+                    // Handle button
+                  },
+                  label: const Text(
+                    'LOAD MORE',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      fontFamily: 'Inter',
+                      color: Color(0xff0864ED),
+                    ),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xffE6F0FD),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(0),
+                    ),
+                    elevation: 0,
+                  ),
+                ),
+              ),
             ],
           ),
       error: (error, stack) => Center(child: Text('Error: $error')),
