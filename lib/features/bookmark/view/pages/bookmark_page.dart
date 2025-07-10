@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:news_app_fe/core/widgets/custom_app_bar.dart';
+import 'package:news_app_fe/core/widgets/common_app_bar.dart';
 
 class BookmarkPage extends ConsumerStatefulWidget {
   const BookmarkPage({super.key});
@@ -13,7 +13,7 @@ class _BookmarkPageState extends ConsumerState<BookmarkPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(appBarTitle: 'Bookmark'),
+      appBar: CommonAppBar(appBarTitle: 'Bookmark'),
       body: Center(child: Text('Bookmark Page')),
     );
   }

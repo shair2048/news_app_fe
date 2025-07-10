@@ -1,9 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logging/logging.dart';
+import 'package:news_app_fe/core/services/api_service.dart';
 import 'package:news_app_fe/core/utils/validators.dart';
 import 'package:news_app_fe/features/auth/model/repositories/auth_repository.dart';
-import 'package:news_app_fe/features/auth/model/services/api_service.dart';
 import 'package:news_app_fe/features/auth/viewmodel/login_state.dart';
+// import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 final loginProvider = StateNotifierProvider<LoginViewModel, LoginState>(
   (ref) => LoginViewModel(ref),
@@ -13,6 +14,7 @@ final authRepositoryProvider = Provider<AuthRepository>(
   (ref) => AuthRepository(ref.read(apiServiceProvider)),
 );
 final log = Logger('RegisterViewModel');
+// final storage = FlutterSecureStorage();
 
 class LoginViewModel extends StateNotifier<LoginState> {
   final Ref ref;
@@ -46,6 +48,9 @@ class LoginViewModel extends StateNotifier<LoginState> {
 
     try {
       final token = await repo.login(state.email, state.password);
+      // await storage.write(key: "token", value: token);
+      // final value = await storage.read(key: "token");
+      // print("Token stored: $value");
     } catch (error) {
       throw Exception('Login failed: $error');
     }

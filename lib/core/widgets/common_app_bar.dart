@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 
-class CustomAppBar extends ConsumerWidget implements PreferredSizeWidget {
+class CommonAppBar extends ConsumerWidget implements PreferredSizeWidget {
   final String? appBarTitle;
-  const CustomAppBar({super.key, this.appBarTitle});
+  const CommonAppBar({super.key, this.appBarTitle});
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);

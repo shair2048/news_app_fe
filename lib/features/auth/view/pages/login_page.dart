@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 // import 'package:flutter_svg/svg.dart';
-import 'package:news_app_fe/core/widgets/custom_app_bar.dart';
+import 'package:news_app_fe/core/widgets/common_app_bar.dart';
 import 'package:news_app_fe/features/auth/view/widgets/auth_footer.dart';
 import 'package:news_app_fe/features/auth/view/widgets/custom_button.dart';
 import 'package:news_app_fe/features/auth/view/widgets/form_text_field.dart';
@@ -37,7 +37,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     final notifier = ref.read(loginProvider.notifier);
 
     return Scaffold(
-      appBar: CustomAppBar(),
+      appBar: CommonAppBar(),
       backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.fromLTRB(20, 40, 20, 0),

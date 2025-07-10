@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:news_app_fe/core/widgets/custom_nav_bar.dart';
+import 'package:news_app_fe/core/widgets/common_bottom_nav_bar.dart';
 // import 'package:news_app_fe/core/themes/app_theme.dart';
 import 'package:news_app_fe/features/auth/view/pages/login_page.dart';
 import 'package:news_app_fe/features/auth/view/pages/register_page.dart';
@@ -27,7 +27,7 @@ void main() {
 
 /// The route configuration.
 final GoRouter _router = GoRouter(
-  initialLocation: '/profile',
+  initialLocation: '/home',
   routes: <RouteBase>[
     GoRoute(path: '/login', builder: (context, state) => const LoginPage()),
     GoRoute(
@@ -38,7 +38,7 @@ final GoRouter _router = GoRouter(
     /// ShellRoute chứa bottom navigation
     ShellRoute(
       builder: (context, state, child) {
-        return Scaffold(body: child, bottomNavigationBar: CustomNavBar());
+        return Scaffold(body: child, bottomNavigationBar: CommonBottomNavBar());
       },
       routes: <RouteBase>[
         GoRoute(

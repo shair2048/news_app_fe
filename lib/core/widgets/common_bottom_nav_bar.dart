@@ -4,8 +4,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:news_app_fe/core/routes/app_router.dart';
 
-class CustomNavBar extends ConsumerWidget {
-  const CustomNavBar({super.key});
+class CommonBottomNavBar extends ConsumerWidget {
+  const CommonBottomNavBar({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

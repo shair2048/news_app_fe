@@ -1,4 +1,4 @@
-import 'package:news_app_fe/features/auth/model/services/api_service.dart';
+import 'package:news_app_fe/core/services/api_service.dart';
 
 class AuthRepository {
   final ApiService api;
@@ -11,7 +11,7 @@ class AuthRepository {
     required String password,
     required String confirmPassword,
   }) async {
-    await api.postData('/register', {
+    await api.postData('/auth/register', {
       'name': fullName,
       'email': email,
       'password': password,
@@ -19,7 +19,7 @@ class AuthRepository {
   }
 
   Future<String> login(String email, String password) async {
-    final res = await api.postData('/login', {
+    final res = await api.postData('/auth/login', {
       'email': email,
       'password': password,
     });
