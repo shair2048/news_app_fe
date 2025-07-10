@@ -3,9 +3,9 @@ import 'package:news_app_fe/core/services/api_service.dart';
 import 'package:news_app_fe/features/home/model/news_item_model.dart';
 import 'package:news_app_fe/features/home/repositories/home_repository.dart';
 
-final authRepositoryProvider = Provider<AuthRepository>((ref) {
+final homeRepositoryProvider = Provider<HomeRepository>((ref) {
   final apiService = ApiService();
-  return AuthRepository(apiService);
+  return HomeRepository(apiService);
 });
 
 final newsViewModelProvider =
@@ -20,9 +20,24 @@ class MostReadViewmodel extends AsyncNotifier<List<NewsItem>> {
   }
 
   Future<List<NewsItem>> getNews() async {
-    final repository = ref.read(authRepositoryProvider);
-    final newsList = await repository.showNews();
-    state = AsyncData(newsList);
-    return newsList;
+    final homeRepository = ref.read(homeRepositoryProvider);
+    final newsList = await homeRepository.showNews();
+    newsList.sort(
+      (firstItem, secondItem) =>
+          secondItem.readCount.compareTo(firstItem.readCount),
+    );
+    final topNews = newsList.take(5).toList();
+    state = AsyncData(topNews);
+    return topNews;
   }
+
+  // Future<void> loadNews() async {
+  //   state = const AsyncLoading();
+  //   try {
+  //     final newsList = await getNews();
+  //     state = AsyncData(newsList);
+  //   } catch (error) {
+  //     state = AsyncError(error);
+  //   }
+  // }
 }

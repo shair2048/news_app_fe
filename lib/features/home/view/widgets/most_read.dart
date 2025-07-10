@@ -13,7 +13,7 @@ class MostRead extends ConsumerWidget {
     return mostReadAsync.when(
       data:
           (mostReadItems) => Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            // crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
                 'MOST READ',
@@ -25,94 +25,111 @@ class MostRead extends ConsumerWidget {
                 ),
               ),
               const SizedBox(height: 16),
-              ...List.generate(mostReadItems.length, (index) {
-                final mostRead = mostReadItems[index];
-                return Container(
-                  height: 100,
-                  margin: EdgeInsets.only(
-                    top: index == 0 ? 0 : 9,
-                    bottom: index == mostReadItems.length - 1 ? 0 : 9,
-                  ),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: const Color(0xffE9EAF0),
-                      width: 1,
-                    ),
-                    borderRadius: BorderRadius.circular(0),
-                  ),
-                  child: InkWell(
-                    onTap: () {
-                      // Handle item tap
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              // Expanded(
-                              Text(
-                                mostRead.title,
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
-                                  color: Color(0xff191F33),
-                                  fontFamily: 'Nunito',
-                                ),
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 2,
-                              ),
-                              // ),
-                              // Text(
-                              //   mostRead.description,
-                              //   style: const TextStyle(
-                              //     fontSize: 14,
-                              //     fontWeight: FontWeight.w400,
-                              //     color: Color(0xff767E94),
-                              //     fontFamily: 'Nunito',
-                              //   ),
-                              //   overflow: TextOverflow.ellipsis,
-                              //   maxLines: 2,
-                              // ),
-                              SizedBox(height: 8),
-                              Row(
-                                children: [
-                                  SvgPicture.asset(
-                                    'assets/icons/eye.svg',
-                                    width: 18,
-                                    height: 18,
-                                  ),
-                                  const SizedBox(width: 6),
-                                  Text(
-                                    '${mostRead.readCount.toInt()}',
-                                    style: const TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w400,
-                                      fontFamily: 'Nunito',
-                                      color: Color(0xff767E94),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
 
-                        SizedBox(width: 20),
-                        Image.network(
-                          mostRead.imageUrl,
-                          height: 100,
-                          width: 100,
-                          fit: BoxFit.cover,
-                        ),
-                      ],
-                    ),
-                  ),
-                );
-              }),
+              // ...List.generate(mostReadItems.length, (index) {
+              //   final mostRead = mostReadItems[index];
+              //   return Container(
+              //     height: 100,
+              //     width: double.infinity,
+              //     margin: EdgeInsets.only(
+              //       top: index == 0 ? 0 : 9,
+              //       bottom: index == mostReadItems.length - 1 ? 0 : 9,
+              //     ),
+              //     decoration: BoxDecoration(
+              //       border: Border.all(
+              //         color: const Color(0xffE9EAF0),
+              //         width: 1,
+              //       ),
+              //       borderRadius: BorderRadius.circular(0),
+              //     ),
+              //     child: InkWell(
+              //       onTap: () {
+              //         // Handle item tap
+              //       },
+              //       child: Row(
+              //         // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //         children: [
+              //           // Padding(
+              //           //   padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+              //           // child: Expanded(
+              //           // child: Container(
+              //           // width: double.infinity,
+              //           // height: 100,
+              //           Expanded(
+              //             // flex: 1,
+              //             child: Column(
+              //               // mainAxisAlignment: MainAxisAlignment.center,
+              //               // crossAxisAlignment: CrossAxisAlignment.stretch,
+              //               children: [
+              //                 // Padding(
+              //                 //   padding: const EdgeInsets.symmetric(
+              //                 //     horizontal: 8.0,
+              //                 //   ),
+              //                 Expanded(
+              //                   // flex: 1,
+              //                   child: Text(
+              //                     mostRead.title,
+              //                     style: const TextStyle(
+              //                       fontSize: 14,
+              //                       fontWeight: FontWeight.w400,
+              //                       color: Color(0xff191F33),
+              //                       fontFamily: 'Nunito',
+              //                     ),
+              //                     overflow: TextOverflow.ellipsis,
+              //                     maxLines: 2,
+              //                   ),
+              //                 ),
+              //                 // ),
+              //                 // Text(
+              //                 //   mostRead.description,
+              //                 //   style: const TextStyle(
+              //                 //     fontSize: 14,
+              //                 //     fontWeight: FontWeight.w400,
+              //                 //     color: Color(0xff767E94),
+              //                 //     fontFamily: 'Nunito',
+              //                 //   ),
+              //                 //   overflow: TextOverflow.ellipsis,
+              //                 //   maxLines: 2,
+              //                 // ),
+              //                 // SizedBox(height: 8),
+              //                 // Row(
+              //                 //   children: [
+              //                 //     SvgPicture.asset(
+              //                 //       'assets/icons/eye.svg',
+              //                 //       width: 18,
+              //                 //       height: 18,
+              //                 //     ),
+              //                 //     const SizedBox(width: 6),
+              //                 //     Text(
+              //                 //       '${mostRead.readCount.toInt()}',
+              //                 //       style: const TextStyle(
+              //                 //         fontSize: 14,
+              //                 //         fontWeight: FontWeight.w400,
+              //                 //         fontFamily: 'Nunito',
+              //                 //         color: Color(0xff767E94),
+              //                 //       ),
+              //                 //     ),
+              //                 //   ],
+              //                 // ),
+              //               ],
+              //             ),
+              //           ),
+              //           // ),
+              //           // ),
+
+              //           // ),
+              //           SizedBox(width: 20),
+              //           Image.network(
+              //             mostRead.imageUrl,
+              //             height: 100,
+              //             width: 100,
+              //             fit: BoxFit.cover,
+              //           ),
+              //         ],
+              //       ),
+              //     ),
+              //   );
+              // }),
               const SizedBox(height: 18),
               SizedBox(
                 width: double.infinity,
@@ -141,6 +158,7 @@ class MostRead extends ConsumerWidget {
               ),
             ],
           ),
+      // ),
       error: (error, stack) => Center(child: Text('Error: $error')),
       loading: () => const Center(child: CircularProgressIndicator()),
     );
