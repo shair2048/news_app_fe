@@ -28,7 +28,34 @@ class MostRead extends ConsumerWidget {
                     fontFamily: 'Nunito',
                   ),
                 );
+              } else if (index == mostReadItems.length - 1) {
+                return SizedBox(
+                  width: double.infinity,
+                  height: 48,
+                  child: ElevatedButton.icon(
+                    onPressed: () {
+                      // Handle button
+                    },
+                    label: const Text(
+                      'LOAD MORE',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        fontFamily: 'Inter',
+                        color: Color(0xff0864ED),
+                      ),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xffE6F0FD),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(0),
+                      ),
+                      elevation: 0,
+                    ),
+                  ),
+                );
               }
+
               final mostRead = mostReadItems[index - 1];
               return Container(
                 height: 100,
@@ -106,7 +133,7 @@ class MostRead extends ConsumerWidget {
               );
             },
           ),
-      error: (e, s) => Center(child: Text('Lỗi: $e')),
+      error: (err, s) => Center(child: Text('Error: $err')),
       loading: () => const Center(child: CircularProgressIndicator()),
     );
   }

@@ -31,7 +31,7 @@ class MostReadViewmodel extends AsyncNotifier<List<NewsItem>> {
       (firstItem, secondItem) =>
           secondItem.readCount.compareTo(firstItem.readCount),
     );
-    final topNews = newsList.take(6).toList();
+    final topNews = newsList.take(7).toList();
     // state = AsyncData(topNews);
     return topNews;
   }
