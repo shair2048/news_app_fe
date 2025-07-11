@@ -11,8 +11,8 @@ final registerProvider =
     );
 
 final apiServiceProvider = Provider<ApiService>((ref) => ApiService());
-final authRepositoryProvider = Provider<IAuthRepository>(
-  (ref) => AuthRepository(ref.read(apiServiceProvider)),
+final authRepositoryProvider = Provider<AuthRepository>(
+  (ref) => AuthRepositoryImpl(ref.read(apiServiceProvider)),
 );
 // final log = Logger('RegisterViewModel');
 

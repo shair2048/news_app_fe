@@ -7,9 +7,9 @@ final apiServiceProvider = Provider<ApiService>(
   (ref) => ApiService(), // Inject ApiService
 );
 
-final homeRepositoryProvider = Provider<IHomeRepository>((ref) {
+final homeRepositoryProvider = Provider<HomeRepository>((ref) {
   final apiService = ref.read(apiServiceProvider);
-  return HomeRepository(apiService);
+  return HomeRepositoryImpl(apiService);
 });
 
 final newsViewModelProvider =

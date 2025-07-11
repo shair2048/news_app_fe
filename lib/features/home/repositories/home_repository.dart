@@ -1,14 +1,14 @@
 import 'package:news_app_fe/core/services/api_service.dart';
 import 'package:news_app_fe/features/home/model/news_item_model.dart';
 
-abstract class IHomeRepository {
+abstract class HomeRepository {
   Future<List<NewsItem>> showNews();
 }
 
-class HomeRepository implements IHomeRepository {
+class HomeRepositoryImpl implements HomeRepository {
   final ApiService api;
 
-  HomeRepository(this.api);
+  HomeRepositoryImpl(this.api);
 
   @override
   Future<List<NewsItem>> showNews() async {
