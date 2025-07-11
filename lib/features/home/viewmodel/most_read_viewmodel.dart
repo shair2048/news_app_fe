@@ -26,12 +26,13 @@ class MostReadViewmodel extends AsyncNotifier<List<NewsItem>> {
   Future<List<NewsItem>> getNews() async {
     final homeRepository = ref.read(homeRepositoryProvider);
     final newsList = await homeRepository.showNews();
+
     newsList.sort(
       (firstItem, secondItem) =>
           secondItem.readCount.compareTo(firstItem.readCount),
     );
-    final topNews = newsList.take(5).toList();
-    state = AsyncData(topNews);
+    final topNews = newsList.take(6).toList();
+    // state = AsyncData(topNews);
     return topNews;
   }
 
