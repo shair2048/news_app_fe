@@ -1,10 +1,22 @@
 import 'package:news_app_fe/core/services/api_service.dart';
 
-class AuthRepository {
+abstract class IAuthRepository {
+  Future<void> register({
+    required String fullName,
+    required String email,
+    required String password,
+    required String confirmPassword,
+  });
+
+  Future<String> login(String email, String password);
+}
+
+class AuthRepository implements IAuthRepository {
   final ApiService api;
 
   AuthRepository(this.api);
 
+  @override
   Future<void> register({
     required String fullName,
     required String email,
@@ -18,6 +30,7 @@ class AuthRepository {
     });
   }
 
+  @override
   Future<String> login(String email, String password) async {
     final res = await api.postData('/auth/login', {
       'email': email,

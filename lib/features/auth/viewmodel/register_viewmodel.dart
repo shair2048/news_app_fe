@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:logging/logging.dart';
+// import 'package:logging/logging.dart';
 import 'package:news_app_fe/core/services/api_service.dart';
 import 'package:news_app_fe/core/utils/validators.dart';
 import 'package:news_app_fe/features/auth/model/repositories/auth_repository.dart';
@@ -11,10 +11,10 @@ final registerProvider =
     );
 
 final apiServiceProvider = Provider<ApiService>((ref) => ApiService());
-final authRepositoryProvider = Provider<AuthRepository>(
+final authRepositoryProvider = Provider<IAuthRepository>(
   (ref) => AuthRepository(ref.read(apiServiceProvider)),
 );
-final log = Logger('RegisterViewModel');
+// final log = Logger('RegisterViewModel');
 
 class RegisterViewModel extends StateNotifier<RegisterState> {
   final Ref ref;
