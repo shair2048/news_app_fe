@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:logging/logging.dart';
+// import 'package:logging/logging.dart';
 import 'package:news_app_fe/core/services/api_service.dart';
 import 'package:news_app_fe/core/utils/validators.dart';
 import 'package:news_app_fe/features/auth/model/repositories/auth_repository.dart';
@@ -11,17 +11,13 @@ final loginProvider = StateNotifierProvider<LoginViewModel, LoginState>(
 );
 final apiServiceProvider = Provider<ApiService>((ref) => ApiService());
 final authRepositoryProvider = Provider<AuthRepository>(
-  (ref) => AuthRepository(ref.read(apiServiceProvider)),
+  (ref) => AuthRepositoryImpl(ref.read(apiServiceProvider)),
 );
-final log = Logger('RegisterViewModel');
-// final storage = FlutterSecureStorage();
+// final log = Logger('RegisterViewModel');
 
 class LoginViewModel extends StateNotifier<LoginState> {
   final Ref ref;
   LoginViewModel(this.ref) : super(LoginState());
-
-  // bool get isEmailValid => Validators.isValidEmail(state.email);
-  // bool get isPasswordValid => Validators.isValidPassword(state.password);
 
   void setEmail(String email) {
     final isValidEmail = Validators.isValidEmail(email);

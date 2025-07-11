@@ -3,9 +3,13 @@ import 'package:news_app_fe/core/services/api_service.dart';
 import 'package:news_app_fe/features/home/model/news_item_model.dart';
 import 'package:news_app_fe/features/home/repositories/home_repository.dart';
 
+final apiServiceProvider = Provider<ApiService>(
+  (ref) => ApiService(), // Inject ApiService
+);
+
 final homeRepositoryProvider = Provider<HomeRepository>((ref) {
-  final apiService = ApiService();
-  return HomeRepository(apiService);
+  final apiService = ref.read(apiServiceProvider);
+  return HomeRepositoryImpl(apiService);
 });
 
 final newsViewModelProvider =
