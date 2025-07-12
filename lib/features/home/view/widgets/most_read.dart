@@ -68,67 +68,72 @@ class MostRead extends ConsumerWidget {
                   borderRadius: BorderRadius.circular(0),
                 ),
 
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 0,
-                          horizontal: 20,
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              mostRead.title,
-                              style: const TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
-                                color: Color(0xff191F33),
-                                fontFamily: 'Nunito',
+                child: InkWell(
+                  onTap: () {
+                    // Handle tap
+                  },
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 0,
+                            horizontal: 20,
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                mostRead.title,
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                  color: Color(0xff191F33),
+                                  fontFamily: 'Nunito',
+                                ),
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
                               ),
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            const SizedBox(height: 8),
-                            Row(
-                              children: [
-                                SvgPicture.asset(
-                                  'assets/icons/eye.svg',
-                                  width: 18,
-                                  height: 18,
-                                ),
-                                const SizedBox(width: 6),
-                                Text(
-                                  '${mostRead.readCount.toInt()}',
-                                  style: const TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400,
-                                    fontFamily: 'Nunito',
-                                    color: Color(0xff767E94),
+                              const SizedBox(height: 8),
+                              Row(
+                                children: [
+                                  SvgPicture.asset(
+                                    'assets/icons/eye.svg',
+                                    width: 18,
+                                    height: 18,
                                   ),
-                                ),
-                              ],
-                            ),
-                          ],
+                                  const SizedBox(width: 6),
+                                  Text(
+                                    '${mostRead.readCount.toInt()}',
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w400,
+                                      fontFamily: 'Nunito',
+                                      color: Color(0xff767E94),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                    Image.network(
-                      mostRead.imageUrl,
-                      height: 100,
-                      width: 100,
-                      fit: BoxFit.cover,
-                      errorBuilder:
-                          (_, __, ___) => Container(
-                            height: 100,
-                            width: 100,
-                            color: Colors.grey[300],
-                            child: const Icon(Icons.broken_image),
-                          ),
-                    ),
-                  ],
+                      Image.network(
+                        mostRead.imageUrl,
+                        height: 100,
+                        width: 100,
+                        fit: BoxFit.cover,
+                        errorBuilder:
+                            (_, __, ___) => Container(
+                              height: 100,
+                              width: 100,
+                              color: Colors.grey[300],
+                              child: const Icon(Icons.broken_image),
+                            ),
+                      ),
+                    ],
+                  ),
                 ),
               );
             },

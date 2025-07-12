@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 // import 'package:logging/logging.dart';
 import 'package:news_app_fe/core/services/api_service.dart';
 import 'package:news_app_fe/core/utils/validators.dart';
-import 'package:news_app_fe/features/auth/model/repositories/auth_repository.dart';
+import 'package:news_app_fe/features/auth/repositories/auth_repository.dart';
 import 'package:news_app_fe/features/auth/viewmodel/register_state.dart';
 
 final registerProvider =
