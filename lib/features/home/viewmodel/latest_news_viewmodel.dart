@@ -29,7 +29,7 @@ class LatestNewsViewmodel extends AsyncNotifier<List<NewsItem>> {
 
     newsList.sort(
       (firstItem, secondItem) =>
-          secondItem.readCount.compareTo(firstItem.readCount),
+          secondItem.createdAt.compareTo(firstItem.createdAt),
     );
     final topNews = newsList.take(7).toList();
     // state = AsyncData(topNews);
