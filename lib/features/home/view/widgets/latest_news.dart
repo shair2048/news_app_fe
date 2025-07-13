@@ -12,47 +12,6 @@ class LatestNews extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final latestNewsAsync = ref.watch(newsViewModelProvider);
 
-    // return Column(
-    //   crossAxisAlignment: CrossAxisAlignment.start,
-    //   children: [
-    //     const Text(
-    //       'LATEST NEWS',
-    //       style: TextStyle(
-    //         fontSize: 16,
-    //         fontWeight: FontWeight.w600,
-    //         color: Color(0xff191F33),
-    //         fontFamily: 'Nunito',
-    //       ),
-    //     ),
-    //     const SizedBox(height: 10),
-    //     ...List.generate(
-    //       items.length,
-    //       (index) => Container(
-    //         height: 100,
-    //         margin: EdgeInsets.only(
-    //           top: index == 0 ? 0 : 9,
-    //           bottom: index == items.length - 1 ? 0 : 9,
-    //         ),
-    //         decoration: BoxDecoration(
-    //           color: Colors.blueAccent,
-    //           borderRadius: BorderRadius.circular(0),
-    //         ),
-    //         child: InkWell(
-    //           onTap: () {
-    //             // Handle item tap
-    //           },
-    //           child: Center(
-    //             child: Text(
-    //               items[index],
-    //               style: TextStyle(color: Colors.white),
-    //               textAlign: TextAlign.center,
-    //             ),
-    //           ),
-    //         ),
-    //       ),
-    //     ),
-    //   ],
-    // );
     return latestNewsAsync.when(
       data:
           (latestNewsItems) => ListView.builder(
