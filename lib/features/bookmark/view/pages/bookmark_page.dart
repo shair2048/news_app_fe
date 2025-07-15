@@ -1,20 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:news_app_fe/core/widgets/common_app_bar.dart';
+import '../../viewmodel/bookmark_viewmodel.dart';
+import '../../view/widgets/bookmark_item.dart';
 
-class BookmarkPage extends ConsumerStatefulWidget {
+class BookmarkPage extends ConsumerWidget {
   const BookmarkPage({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _BookmarkPageState();
-}
-
-class _BookmarkPageState extends ConsumerState<BookmarkPage> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final bookmarkViewModel = ref.watch(bookmarkViewModelProvider);
+    final bookmarkedItems = bookmarkViewModel.getBookmarkedItems();
     return Scaffold(
-      appBar: CommonAppBar(appBarTitle: 'Bookmark'),
-      body: Center(child: Text('Bookmark Page')),
+      appBar: const CommonAppBar(appBarTitle: 'Bookmark'),
+      body: ListView.builder(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+        itemCount: bookmarkedItems.length,
+        itemBuilder: (context, index) {
+          final item = bookmarkedItems[index];
+          return BookmarkItem(
+            bookmarkItem: item,
+            onShare: () => bookmarkViewModel.onShareTap(item),
+            onBookmark: () => bookmarkViewModel.onBookmarkTap(item),
+          );
+        },
+      ),
     );
   }
 }
