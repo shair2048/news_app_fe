@@ -16,28 +16,25 @@ class NewsDetailPage extends ConsumerWidget {
     final news = ref.watch(newsProvider).getNewsDetail();
 
     return Scaffold(
-      backgroundColor: const Color(0xFFFAFAFA),
       appBar: const CommonAppBar(appBarTitle: 'News Detail'),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            NewsHeader(title: news.title, imageUrl: news.imageUrl),
-            const SizedBox(height: 16),
-            NewsAuthorInfo(
-              authorImage: news.authorImage,
-              authorName: news.authorName,
-              publishedDate: news.publishedDate,
-            ),
-            const SizedBox(height: 16),
-            NewsContentSection(content: news.content),
-            const SizedBox(height: 16),
-            NewsFeedbackSection(likes: news.likes, comments: news.comments),
-            const SizedBox(height: 32),
-            const LatestNews(),
-          ],
-        ),
+      backgroundColor: Colors.white,
+      body: ListView(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
+        children: [
+          NewsHeader(title: news.title),
+          const SizedBox(height: 24),
+          NewsAuthorInfo(
+            // authorImage: news.authorImage,
+            // authorName: news.authorName,
+            publishedDate: news.createdAt,
+          ),
+          const SizedBox(height: 24),
+          NewsContentSection(content: news.description),
+          const SizedBox(height: 24),
+          // NewsFeedbackSection(likes: news.likes, comments: news.comments),
+          const SizedBox(height: 32),
+          LatestNews(),
+        ],
       ),
     );
   }

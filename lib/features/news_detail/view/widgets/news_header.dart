@@ -3,13 +3,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class NewsHeader extends StatelessWidget {
   final String title;
-  final String imageUrl;
+  final String? imageUrl;
 
-  const NewsHeader({
-    super.key,
-    required this.title,
-    required this.imageUrl,
-  });
+  const NewsHeader({super.key, required this.title, this.imageUrl});
 
   @override
   Widget build(BuildContext context) {
@@ -18,31 +14,42 @@ class NewsHeader extends StatelessWidget {
       children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(8),
-          child: SvgPicture.asset('assets/icons/newsdetail.svg',
+          child: SvgPicture.asset(
+            'assets/icons/newsdetail.svg',
             width: double.infinity,
             height: 200,
             fit: BoxFit.cover,
           ),
         ),
         const SizedBox(height: 16),
-        Row(
+        Column(
           children: [
-            const Icon(Icons.visibility, size: 16, color: Colors.blue),
-            const SizedBox(width: 4),
-            const Text('25.9k'),
-            const SizedBox(width: 16),
-            const Icon(Icons.comment, size: 16, color: Colors.blue),
-            const SizedBox(width: 4),
-            const Text('657 Comments'),
+            Row(
+              children: [
+                SvgPicture.asset('assets/icons/eye.svg', width: 20, height: 20),
+                const SizedBox(width: 4),
+                Text(
+                  '25.9k',
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                    fontFamily: 'Nunito',
+                    color: Color(0xff464D61),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            Text(
+              title,
+              style: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
+                fontFamily: 'Nunito',
+                color: Color(0xff191F33),
+              ),
+            ),
           ],
-        ),
-        const SizedBox(height: 8),
-        Text(
-          title,
-          style: const TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-          ),
         ),
       ],
     );
