@@ -10,6 +10,8 @@ class MostRead extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final mostReadAsync = ref.watch(newsViewModelProvider);
+    final isLoading = ref.watch(loadMoreProvider);
+    final newsState = ref.read(newsViewModelProvider.notifier);
     final itemCount = 5;
 
     return Column(
@@ -135,9 +137,14 @@ class MostRead extends ConsumerWidget {
           width: double.infinity,
           height: 48,
           child: ElevatedButton.icon(
-            onPressed: () {
-              // Handle button
-            },
+            onPressed:
+                isLoading
+                    ? null
+                    : () {
+                      ref.read(loadMoreProvider.notifier).state = true;
+                      newsState.loadMore();
+                      ref.read(loadMoreProvider.notifier).state = false;
+                    },
             label: const Text(
               'LOAD MORE',
               style: TextStyle(
