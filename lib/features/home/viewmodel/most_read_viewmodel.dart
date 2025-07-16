@@ -17,32 +17,33 @@ final newsViewModelProvider =
       () => MostReadViewmodel(),
     );
 
+final loadMoreProvider = StateProvider<bool>((ref) => false);
+
 class MostReadViewmodel extends AsyncNotifier<List<NewsItem>> {
+  List<NewsItem> _allNews = [];
+  int _visibleCount = 5;
+
   @override
   Future<List<NewsItem>> build() async {
-    return getNews();
-  }
-
-  Future<List<NewsItem>> getNews() async {
     final homeRepository = ref.read(homeRepositoryProvider);
-    final newsList = await homeRepository.showNews();
+    final allNews = await homeRepository.showNews();
 
-    newsList.sort(
-      (firstItem, secondItem) =>
-          secondItem.readCount.compareTo(firstItem.readCount),
+    allNews.sort(
+      (firstNews, secondNews) =>
+          secondNews.readCount.compareTo(firstNews.readCount),
     );
-    final topNews = newsList.take(7).toList();
-    // state = AsyncData(topNews);
-    return topNews;
+    _allNews = allNews;
+
+    return _allNews.take(_visibleCount).toList();
   }
 
-  // Future<void> loadNews() async {
-  //   state = const AsyncLoading();
-  //   try {
-  //     final newsList = await getNews();
-  //     state = AsyncData(newsList);
-  //   } catch (error) {
-  //     state = AsyncError(error);
-  //   }
-  // }
+  void loadMore() {
+    // Increment the visible count
+    _visibleCount += 10;
+
+    // Update state with new data (don't loading again from API)
+    state = AsyncValue.data(_allNews.take(_visibleCount).toList());
+  }
+
+  // bool get hasMore => _visibleCount < _allNews.length;
 }

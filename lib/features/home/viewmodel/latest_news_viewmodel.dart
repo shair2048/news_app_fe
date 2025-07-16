@@ -18,21 +18,28 @@ final newsViewModelProvider =
     );
 
 class LatestNewsViewmodel extends AsyncNotifier<List<NewsItem>> {
+  List<NewsItem> _allNews = [];
+  int _visibleCount = 5;
+
   @override
   Future<List<NewsItem>> build() async {
-    return getNews();
+    final homeRepository = ref.read(homeRepositoryProvider);
+    final allNews = await homeRepository.showNews();
+
+    allNews.sort(
+      (firstNews, secondNews) =>
+          secondNews.createdAt.compareTo(firstNews.createdAt),
+    );
+    _allNews = allNews;
+
+    return _allNews.take(_visibleCount).toList();
   }
 
-  Future<List<NewsItem>> getNews() async {
-    final homeRepository = ref.read(homeRepositoryProvider);
-    final newsList = await homeRepository.showNews();
+  void loadMore() {
+    // Increment the visible count
+    _visibleCount += 10;
 
-    newsList.sort(
-      (firstItem, secondItem) =>
-          secondItem.createdAt.compareTo(firstItem.createdAt),
-    );
-    final topNews = newsList.take(7).toList();
-    // state = AsyncData(topNews);
-    return topNews;
+    // Update state with new data (don't loading again from API)
+    state = AsyncValue.data(_allNews.take(_visibleCount).toList());
   }
 }
