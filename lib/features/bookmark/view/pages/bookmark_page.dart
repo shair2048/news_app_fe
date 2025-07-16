@@ -14,13 +14,13 @@ class BookmarkPage extends ConsumerWidget {
     return Scaffold(
       appBar: const CommonAppBar(appBarTitle: 'Bookmark'),
       body: ListView.builder(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+        padding: const EdgeInsets.symmetric(vertical: 30),
         itemCount: bookmarkedItems.length,
         itemBuilder: (context, index) {
           final item = bookmarkedItems[index];
           return BookmarkItem(
             bookmarkItem: item,
-            onShare: () => bookmarkViewModel.onShareTap(item),
+            // onShare: () => bookmarkViewModel.onShareTap(item),
             onBookmark: () => bookmarkViewModel.onBookmarkTap(item),
           );
         },

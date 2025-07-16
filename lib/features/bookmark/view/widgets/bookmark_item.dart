@@ -1,31 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../model/bookmark_model.dart';
+
 class BookmarkItem extends StatelessWidget {
   final BookmarkModel bookmarkItem;
-  final VoidCallback onShare;
   final VoidCallback onBookmark;
 
   const BookmarkItem({
     super.key,
     required this.bookmarkItem,
-    required this.onShare,
     required this.onBookmark,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 0),
-      elevation: 0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(0),
+    return Container(
+      decoration: const BoxDecoration(
+        border: Border(bottom: BorderSide(color: Color(0xffE9EAF0), width: 1)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(8),
+          InkWell(
+            borderRadius: BorderRadius.circular(0),
             child: Image.asset(
               bookmarkItem.imageUrl,
               fit: BoxFit.cover,
@@ -41,67 +38,69 @@ class BookmarkItem extends StatelessWidget {
               },
             ),
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: 20),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   bookmarkItem.title,
                   style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w400,
                     fontFamily: 'Nunito',
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
+                    color: Color(0xff191F33),
                   ),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
-                const SizedBox(height: 4),
+                const SizedBox(height: 6),
                 Text(
                   bookmarkItem.description,
                   style: const TextStyle(
-                    fontFamily: 'Nunito',
                     fontSize: 14,
-                    color: Colors.grey,
+                    fontWeight: FontWeight.w400,
+                    fontFamily: 'Nunito',
+                    color: Color(0xff767E94),
                   ),
                   maxLines: 3,
                   overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.justify,
                 ),
-                const SizedBox(height: 8),
+                const SizedBox(height: 20),
                 Row(
                   children: [
-                    const Icon(Icons.visibility, size: 16, color: Colors.blue), // Icon views
-                    const SizedBox(width: 4),
+                    SvgPicture.asset(
+                      'assets/icons/eye.svg',
+                      width: 20,
+                      height: 20,
+                      colorFilter: ColorFilter.mode(
+                        Color(0xff0864ED),
+                        BlendMode.srcIn,
+                      ),
+                    ), // Icon views
+                    const SizedBox(width: 6),
                     Text(
                       '${bookmarkItem.views ~/ 1000}k',
-                      style: const TextStyle(fontFamily: 'Nunito', fontSize: 12, color: Colors.black87),
-                    ),
-                    const SizedBox(width: 16),
-                    const Icon(Icons.comment, size: 16, color: Colors.blue),
-                    const SizedBox(width: 4),
-                    Text(
-                      '${bookmarkItem.comments} Comments',
-                      style: const TextStyle(fontFamily: 'Nunito', fontSize: 12, color: Colors.black87),
-                    ),
-                    const Spacer(),
-                    GestureDetector(
-                      onTap: onShare,
-                      child: SvgPicture.asset(
-                        'assets/icons/share.svg',
-                        width: 20,
-                        height: 20,
-                        colorFilter: ColorFilter.mode(Colors.grey[700]!, BlendMode.srcIn),
+                      style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                        fontFamily: 'Nunito',
+                        color: Color(0xff464D61),
                       ),
                     ),
-                    const SizedBox(width: 16),
-                    GestureDetector(
-                      onTap: onBookmark,
-                      child: SvgPicture.asset(
-                        'assets/icons/bookmark.svg',
+                    const Spacer(),
+                    IconButton(
+                      onPressed: () => onBookmark,
+                      icon: SvgPicture.asset(
+                        'assets/icons/bookmark_active.svg',
                         width: 20,
                         height: 20,
-                        colorFilter: ColorFilter.mode(Colors.blue, BlendMode.srcIn),
+                        colorFilter: ColorFilter.mode(
+                          Colors.blue,
+                          BlendMode.srcIn,
+                        ),
                       ),
                     ),
                   ],
@@ -110,7 +109,6 @@ class BookmarkItem extends StatelessWidget {
               ],
             ),
           ),
-          const Divider(height: 1, thickness: 1, color: Colors.grey),
         ],
       ),
     );
