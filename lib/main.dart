@@ -11,7 +11,7 @@ import 'package:news_app_fe/features/category/view/pages/category_page.dart';
 import 'package:news_app_fe/features/home/view/pages/home_page.dart';
 import 'package:news_app_fe/features/profile/view/pages/profile_page.dart';
 import 'package:news_app_fe/features/search/view/pages/search_page.dart';
-import 'package:news_app_fe/features/newsdetail/view/pages/news_detail_page.dart';
+import 'package:news_app_fe/features/news_detail/view/pages/news_detail_page.dart';
 import 'package:logging/logging.dart';
 
 void main() {
@@ -29,6 +29,7 @@ void main() {
 /// The route configuration.
 final GoRouter _router = GoRouter(
   initialLocation: '/bookmark',
+
   routes: <RouteBase>[
     GoRoute(path: '/login', builder: (context, state) => const LoginPage()),
     GoRoute(
@@ -68,7 +69,7 @@ final GoRouter _router = GoRouter(
           builder: (context, state) => const ProfilePage(),
         ),
         GoRoute(
-          path: '/newsdetailpage',
+          path: '/news_detail',
           builder: (context, state) => const NewsDetailPage(),
         ),
       ],

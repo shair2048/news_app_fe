@@ -10,11 +10,12 @@ class NewsContentSection extends StatelessWidget {
     return Text(
       content,
       style: const TextStyle(
-        fontFamily: 'Nunito',
         fontSize: 14,
-        color: Colors.black87,
-        height: 1.6,
+        fontWeight: FontWeight.w400,
+        fontFamily: 'Nunito',
+        color: Color(0xff636A80),
       ),
+      textAlign: TextAlign.justify,
     );
   }
 }

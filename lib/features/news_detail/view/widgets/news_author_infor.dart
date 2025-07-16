@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+// import 'package:flutter_svg/flutter_svg.dart';
 
 class NewsAuthorInfo extends StatelessWidget {
-  final String authorImage;
-  final String authorName;
+  final String? authorAvatar;
+  final String? authorName;
   final String publishedDate;
 
   const NewsAuthorInfo({
     super.key,
-    required this.authorImage,
-    required this.authorName,
+    this.authorAvatar,
+    this.authorName,
     required this.publishedDate,
   });
 
@@ -17,31 +18,35 @@ class NewsAuthorInfo extends StatelessWidget {
     return Row(
       children: [
         CircleAvatar(
-          backgroundImage: AssetImage(authorImage), // Sử dụng AssetImage để load ảnh từ assets
+          backgroundImage: NetworkImage(
+            'https://res.cloudinary.com/dkn3kk3un/image/upload/f_auto,q_auto/c_fill,g_auto,h_600,w_800/v1/news_images/y1m0d3bwivmof8vcr9ch?_a=BAMClqZW0',
+          ),
           radius: 20,
         ),
-        const SizedBox(width: 12),
+        const SizedBox(width: 8),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              authorName,
+              authorName != null ? authorName! : 'John Doe',
               style: const TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w600,
                 fontFamily: 'Nunito',
+                color: Color(0xff191F33),
               ),
             ),
             Text(
               publishedDate,
               style: const TextStyle(
                 fontSize: 12,
-                color: Colors.grey,
+                fontWeight: FontWeight.w400,
                 fontFamily: 'Nunito',
+                color: Color(0xff464D61),
               ),
             ),
           ],
-        )
+        ),
       ],
     );
   }
