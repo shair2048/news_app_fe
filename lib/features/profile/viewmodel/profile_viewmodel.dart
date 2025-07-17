@@ -1,15 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:go_router/go_router.dart';
 import 'package:news_app_fe/features/profile/viewmodel/profile_state.dart';
 import '../model/profile_model.dart';
 
-final profileProvider = StateNotifierProvider<ProfileViewmodel, ProfileState>(
-  (ref) => ProfileViewmodel(),
-);
+final storageProvider = Provider<FlutterSecureStorage>((ref) {
+  return const FlutterSecureStorage(); // const để tránh tạo lại
+});
+
+final profileProvider = StateNotifierProvider<ProfileViewmodel, ProfileState>((
+  ref,
+) {
+  final storage = ref.read(storageProvider);
+  return ProfileViewmodel(storage);
+});
 
 class ProfileViewmodel extends StateNotifier<ProfileState> {
-  ProfileViewmodel() : super(ProfileState());
+  final FlutterSecureStorage storage;
+  ProfileViewmodel(this.storage) : super(ProfileState()) {
+    loadUserData();
+  }
 
   void toggleDarkMode(bool value) {
     state = state.copyWith(isDarkMode: value);
@@ -61,5 +72,12 @@ class ProfileViewmodel extends StateNotifier<ProfileState> {
         onTap: () => logout(context),
       ),
     ];
+  }
+
+  Future<void> loadUserData() async {
+    final name = await storage.read(key: 'name') ?? 'User';
+    final email = await storage.read(key: 'email') ?? 'user@gmail.com';
+
+    state = state.copyWith(user: ProfileUser(name: name, email: email));
   }
 }
