@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 // import 'package:logging/logging.dart';
 import 'package:news_app_fe/core/services/api_service.dart';
 import 'package:news_app_fe/core/utils/validators.dart';
@@ -41,12 +42,17 @@ class LoginViewModel extends StateNotifier<LoginState> {
 
   Future<void> submit() async {
     final repo = ref.read(authRepositoryProvider);
+    final storage = FlutterSecureStorage();
 
     try {
-      final token = await repo.login(state.email, state.password);
-      // await storage.write(key: "token", value: token);
+      final submitResult = await repo.login(state.email, state.password);
+      await storage.write(key: "token", value: submitResult.token);
+      await storage.write(key: "name", value: submitResult.name);
+      await storage.write(key: "email", value: submitResult.email);
       // final value = await storage.read(key: "token");
-      // print("Token stored: $value");
+      // print("Token stored: ${submitResult.token}");
+      // print("Token stored: ${submitResult.name}");
+      // print("Token stored: ${submitResult.email}");
     } catch (error) {
       throw Exception('Login failed: $error');
     }

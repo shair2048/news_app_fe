@@ -1,4 +1,5 @@
 import 'package:news_app_fe/core/services/api_service.dart';
+import 'package:news_app_fe/features/auth/model/login_result_model.dart';
 
 abstract class AuthRepository {
   Future<void> register({
@@ -8,7 +9,7 @@ abstract class AuthRepository {
     required String confirmPassword,
   });
 
-  Future<String> login(String email, String password);
+  Future<LoginResult> login(String email, String password);
 }
 
 class AuthRepositoryImpl implements AuthRepository {
@@ -23,7 +24,7 @@ class AuthRepositoryImpl implements AuthRepository {
     required String password,
     required String confirmPassword,
   }) async {
-    await api.postData('/auth/register', {
+    await api.postData('/auth/sign-up', {
       'name': fullName,
       'email': email,
       'password': password,
@@ -31,15 +32,20 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<String> login(String email, String password) async {
-    final res = await api.postData('/auth/login', {
+  Future<LoginResult> login(String email, String password) async {
+    final res = await api.postData('/auth/sign-in', {
       'email': email,
       'password': password,
     });
 
     if (res.statusCode == 200) {
-      final token = res.data['token'];
-      return token;
+      final data = res.data['data'];
+      if (data != null && data['token'] != null && data['user'] != null) {
+        return LoginResult.fromJson(data);
+      } else {
+        throw Exception('Login failed: Missing token or user information');
+      }
+      // return token;
     } else {
       throw Exception('Login failed: ${res.data['message']}');
     }

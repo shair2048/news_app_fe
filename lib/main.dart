@@ -28,7 +28,7 @@ void main() {
 
 /// The route configuration.
 final GoRouter _router = GoRouter(
-  initialLocation: '/bookmark',
+  initialLocation: '/login',
 
   routes: <RouteBase>[
     GoRoute(path: '/login', builder: (context, state) => const LoginPage()),
