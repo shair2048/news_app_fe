@@ -5,7 +5,6 @@ import 'package:news_app_fe/core/services/api_service.dart';
 import 'package:news_app_fe/core/utils/validators.dart';
 import 'package:news_app_fe/features/auth/repositories/auth_repository.dart';
 import 'package:news_app_fe/features/auth/viewmodel/login_state.dart';
-// import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 final loginProvider = StateNotifierProvider<LoginViewModel, LoginState>(
   (ref) => LoginViewModel(ref),
@@ -46,13 +45,13 @@ class LoginViewModel extends StateNotifier<LoginState> {
 
     try {
       final submitResult = await repo.login(state.email, state.password);
+
+      // Save token and user data to secure storage
       await storage.write(key: "token", value: submitResult.token);
-      await storage.write(key: "name", value: submitResult.name);
-      await storage.write(key: "email", value: submitResult.email);
-      // final value = await storage.read(key: "token");
-      // print("Token stored: ${submitResult.token}");
-      // print("Token stored: ${submitResult.name}");
-      // print("Token stored: ${submitResult.email}");
+      await storage.write(key: "id", value: submitResult.id);
+
+      // Update the auth state
+      // await ref.read(authViewModelProvider.notifier).login(submitResult.token);
     } catch (error) {
       throw Exception('Login failed: $error');
     }
