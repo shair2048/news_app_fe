@@ -9,7 +9,9 @@ class ProfileState {
     ProfileUser? user,
     this.isDarkMode = false,
     this.isLoading = false,
-  }) : user = user ?? ProfileUser(name: 'User', email: 'user@gmail.com');
+  }) : user =
+           user ??
+           ProfileUser(name: 'unknown_user', email: 'unknown_user@gmail.com');
 
   ProfileState copyWith({
     ProfileUser? user,

@@ -10,8 +10,11 @@ class ApiService {
     ),
   );
 
-  Future<Response> getData(String endpoint) async {
-    return await _dio.get(endpoint);
+  Future<Response> getData(
+    String endpoint, {
+    Map<String, dynamic>? headers,
+  }) async {
+    return await _dio.get(endpoint, options: Options(headers: headers));
   }
 
   Future<Response> postData(String endpoint, Map<String, dynamic> data) async {

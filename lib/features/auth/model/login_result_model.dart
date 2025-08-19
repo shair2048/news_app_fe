@@ -1,15 +1,10 @@
 class LoginResult {
   final String token;
-  final String name;
-  final String email;
+  final String id;
 
-  LoginResult({required this.token, required this.name, required this.email});
+  LoginResult({required this.token, required this.id});
 
   factory LoginResult.fromJson(Map<String, dynamic> json) {
-    return LoginResult(
-      token: json['token'],
-      name: json['user']['name'],
-      email: json['user']['email'],
-    );
+    return LoginResult(token: json['token'], id: json['user']['_id']);
   }
 }

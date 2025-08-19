@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:go_router/go_router.dart';
+import 'package:news_app_fe/core/services/api_service.dart';
+import 'package:news_app_fe/features/profile/repositories/profile_repository.dart';
 import 'package:news_app_fe/features/profile/viewmodel/profile_state.dart';
 import '../model/profile_model.dart';
 
@@ -9,16 +11,26 @@ final storageProvider = Provider<FlutterSecureStorage>((ref) {
   return const FlutterSecureStorage(); // const để tránh tạo lại
 });
 
+final apiServiceProvider = Provider<ApiService>((ref) => ApiService());
+final profileRepositoryProvider = Provider<ProfileRepository>((ref) {
+  final apiService = ref.read(apiServiceProvider);
+  return ProfileRepositoryImpl(apiService);
+});
+
 final profileProvider = StateNotifierProvider<ProfileViewmodel, ProfileState>((
   ref,
 ) {
   final storage = ref.read(storageProvider);
-  return ProfileViewmodel(storage);
+  final repo = ref.read(profileRepositoryProvider);
+  return ProfileViewmodel(ref, storage, repo);
 });
 
 class ProfileViewmodel extends StateNotifier<ProfileState> {
+  final Ref ref;
   final FlutterSecureStorage storage;
-  ProfileViewmodel(this.storage) : super(ProfileState()) {
+  final ProfileRepository repo;
+
+  ProfileViewmodel(this.ref, this.storage, this.repo) : super(ProfileState()) {
     loadUserData();
   }
 
@@ -51,16 +63,16 @@ class ProfileViewmodel extends StateNotifier<ProfileState> {
         switchValue: state.isDarkMode,
         onSwitchChanged: toggleDarkMode,
       ),
-      ProfileMenuItem(
-        title: 'Edit Profile',
-        iconPath: 'assets/icons/pencil.svg',
-        onTap: () => navigateToEditProfile(context),
-      ),
-      ProfileMenuItem(
-        title: 'My Article',
-        iconPath: 'assets/icons/notepencil.svg',
-        onTap: () => navigateToMyArticle(context),
-      ),
+      // ProfileMenuItem(
+      //   title: 'Edit Profile',
+      //   iconPath: 'assets/icons/pencil.svg',
+      //   onTap: () => navigateToEditProfile(context),
+      // ),
+      // ProfileMenuItem(
+      //   title: 'My Article',
+      //   iconPath: 'assets/icons/notepencil.svg',
+      //   onTap: () => navigateToMyArticle(context),
+      // ),
       ProfileMenuItem(
         title: 'Bookmark',
         iconPath: 'assets/icons/bookmark.svg',
@@ -75,9 +87,18 @@ class ProfileViewmodel extends StateNotifier<ProfileState> {
   }
 
   Future<void> loadUserData() async {
-    final name = await storage.read(key: 'name') ?? 'User';
-    final email = await storage.read(key: 'email') ?? 'user@gmail.com';
+    final id = await storage.read(key: 'id');
+    final accessToken = await storage.read(key: 'token');
 
-    state = state.copyWith(user: ProfileUser(name: name, email: email));
+    try {
+      final userInfo = await repo.getUserInformation(
+        userId: id!,
+        accessToken: accessToken!,
+      );
+
+      state = state.copyWith(user: userInfo, isLoading: false);
+    } catch (error) {
+      throw Exception('User data loading failed: $error');
+    }
   }
 }
