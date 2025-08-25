@@ -1,23 +1,19 @@
-import 'package:news_app_fe/features/profile/model/profile_model.dart';
+import 'package:news_app_fe/features/profile/data/models/user_model.dart';
 
 class ProfileState {
-  final ProfileUser user;
+  final UserModel user;
   final bool isDarkMode;
   final bool isLoading;
 
   ProfileState({
-    ProfileUser? user,
+    UserModel? user,
     this.isDarkMode = false,
     this.isLoading = false,
   }) : user =
            user ??
-           ProfileUser(name: 'unknown_user', email: 'unknown_user@gmail.com');
+           UserModel(name: 'unknown_user', email: 'unknown_user@gmail.com');
 
-  ProfileState copyWith({
-    ProfileUser? user,
-    bool? isDarkMode,
-    bool? isLoading,
-  }) {
+  ProfileState copyWith({UserModel? user, bool? isDarkMode, bool? isLoading}) {
     return ProfileState(
       user: user ?? this.user,
       isDarkMode: isDarkMode ?? this.isDarkMode,

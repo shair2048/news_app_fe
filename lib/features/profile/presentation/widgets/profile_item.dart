@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:news_app_fe/features/profile/model/profile_model.dart';
+import 'package:news_app_fe/features/profile/data/models/user_model.dart';
 
 class ProfileItem extends ConsumerWidget {
   final ProfileMenuItem menuItem;

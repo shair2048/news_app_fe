@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
 
-class ProfileUser {
+class UserModel {
   final String name;
   final String email;
   final String? avatarUrl;
 
-  ProfileUser({required this.name, required this.email, this.avatarUrl});
+  UserModel({required this.name, required this.email, this.avatarUrl});
 
-  ProfileUser copyWith({String? name, String? email, String? avatarUrl}) {
-    return ProfileUser(
-      name: name ?? this.name,
-      email: email ?? this.email,
-      avatarUrl: avatarUrl ?? this.avatarUrl,
+  factory UserModel.fromJson(Map<String, dynamic> json) {
+    return UserModel(
+      email: json['email'],
+      name: json['name'],
+      avatarUrl: json['avatarUrl'],
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {'name': name, 'email': email, 'avatarUrl': avatarUrl};
   }
 }
 
