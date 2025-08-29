@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:news_app_fe/features/home/view/widgets/news_shimmer_loading.dart';
-import 'package:news_app_fe/features/home/viewmodel/latest_news_viewmodel.dart';
+import 'package:news_app_fe/features/home/presentation/riverpod/latest_articles_provider.dart';
+import 'package:news_app_fe/features/home/presentation/widgets/news_shimmer_loading.dart';
 
 // List<String> items = ['Item 1', 'Item 2', 'Item 3'];
 
@@ -11,7 +11,7 @@ class LatestNews extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final latestNewsAsync = ref.watch(newsViewModelProvider);
+    final latestNewsAsync = ref.watch(latestArticlesProvider);
     final itemCount = 5;
 
     return Column(

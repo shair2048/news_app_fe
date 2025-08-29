@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:news_app_fe/features/home/model/category_model.dart';
+import 'package:news_app_fe/features/home/data/model/category_model.dart';
 
 final topCategoryProvider = Provider<List<Category>>((ref) {
   return [

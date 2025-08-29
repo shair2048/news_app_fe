@@ -4,7 +4,7 @@ import 'package:news_app_fe/core/widgets/common_app_bar.dart';
 import '../widgets/news_author_infor.dart';
 import '../widgets/news_content_section.dart';
 import '../widgets/news_header.dart';
-import 'package:news_app_fe/features/home/view/widgets/latest_news.dart';
+import 'package:news_app_fe/features/home/presentation/widgets/latest_articles.dart';
 import 'package:news_app_fe/features/news_detail/viewmodel/news_detail_viewmodel.dart';
 
 class NewsDetailPage extends ConsumerWidget {

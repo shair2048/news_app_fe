@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:news_app_fe/features/home/view/widgets/news_shimmer_loading.dart';
-import 'package:news_app_fe/features/home/viewmodel/most_read_viewmodel.dart';
+import 'package:news_app_fe/features/home/presentation/riverpod/most_read_provider.dart';
+import 'package:news_app_fe/features/home/presentation/widgets/news_shimmer_loading.dart';
 
 class MostRead extends ConsumerWidget {
   const MostRead({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final mostReadAsync = ref.watch(newsViewModelProvider);
+    final mostReadAsync = ref.watch(mostReadNotifierProvider);
     final isLoading = ref.watch(loadMoreProvider);
-    final newsState = ref.read(newsViewModelProvider.notifier);
+    final newsState = ref.read(mostReadNotifierProvider.notifier);
     final itemCount = 5;
 
     return Column(
@@ -46,6 +46,8 @@ class MostRead extends ConsumerWidget {
                 itemCount: mostReadItems.length,
                 itemBuilder: (context, index) {
                   final mostRead = mostReadItems[index];
+                  // print('Id hereeee: ${mostRead.newsId}');
+
                   return Container(
                     height: 100,
                     margin: EdgeInsets.only(
@@ -111,6 +113,7 @@ class MostRead extends ConsumerWidget {
                               ),
                             ),
                           ),
+
                           Image.network(
                             mostRead.imageUrl,
                             height: 100,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:news_app_fe/features/home/viewmodel/top_category_viewmodel.dart';
+import 'package:news_app_fe/features/home/presentation/riverpod/top_category_provider.dart';
 
 class TopCategory extends ConsumerWidget {
   const TopCategory({super.key});

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:news_app_fe/features/home/view/widgets/latest_news.dart';
-import 'package:news_app_fe/features/home/view/widgets/most_read.dart';
-import 'package:news_app_fe/features/home/view/widgets/search_app_bar.dart';
-import 'package:news_app_fe/features/home/view/widgets/top_category.dart';
+import 'package:news_app_fe/features/home/presentation/widgets/latest_articles.dart';
+import 'package:news_app_fe/features/home/presentation/widgets/most_read.dart';
+import 'package:news_app_fe/features/home/presentation/widgets/search_app_bar.dart';
+import 'package:news_app_fe/features/home/presentation/widgets/top_category.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
