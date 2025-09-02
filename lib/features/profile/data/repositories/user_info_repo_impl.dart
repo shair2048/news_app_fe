@@ -35,11 +35,5 @@ class UserInfoRepositoryImpl implements AbstractUserInfoRepository {
         );
       }
     }
-
-    // return User(
-    //   name: userModel.name,
-    //   email: userModel.email,
-    //   avatarUrl: userModel.avatarUrl,
-    // );
   }
 }

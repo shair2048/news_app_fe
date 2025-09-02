@@ -46,7 +46,6 @@ class MostRead extends ConsumerWidget {
                 itemCount: mostReadItems.length,
                 itemBuilder: (context, index) {
                   final mostRead = mostReadItems[index];
-                  // print('Id hereeee: ${mostRead.newsId}');
 
                   return Container(
                     height: 100,

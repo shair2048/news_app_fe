@@ -8,17 +8,6 @@ class MostReadNotifier extends AsyncNotifier<List<Article>> {
 
   @override
   Future<List<Article>> build() async {
-    // final homeRepository = ref.read(homeRepositoryProvider);
-    // final allNews = await homeRepository.showNews();
-
-    // allNews.sort(
-    //   (firstNews, secondNews) =>
-    //       secondNews.readCount.compareTo(firstNews.readCount),
-    // );
-    // _allArticles = allNews;
-
-    // return _allArticles.take(_visibleCount).toList();
-
     final getArticles = ref.read(getArticlesProvider);
     final result = await getArticles();
 
