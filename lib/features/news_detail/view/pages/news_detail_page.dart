@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:news_app_fe/core/widgets/common_app_bar.dart';
+import 'package:news_app_fe/shared/presentation/widgets/common_app_bar.dart';
 import '../widgets/news_author_infor.dart';
 import '../widgets/news_content_section.dart';
 import '../widgets/news_header.dart';

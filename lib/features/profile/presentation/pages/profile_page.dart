@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:news_app_fe/core/widgets/common_app_bar.dart';
+import 'package:news_app_fe/shared/presentation/widgets/common_app_bar.dart';
 import '../riverpod/profile_provider.dart';
 import '../riverpod/profile_state.dart';
 

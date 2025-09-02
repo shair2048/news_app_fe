@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:news_app_fe/core/widgets/common_app_bar.dart';
-import 'package:news_app_fe/features/auth/view/widgets/auth_footer.dart';
-import 'package:news_app_fe/features/auth/view/widgets/custom_button.dart';
-import 'package:news_app_fe/features/auth/view/widgets/form_text_field.dart';
-import 'package:news_app_fe/features/auth/viewmodel/register_viewmodel.dart';
+import 'package:news_app_fe/shared/presentation/widgets/common_app_bar.dart';
+import 'package:news_app_fe/features/auth/presentation/riverpod/provider/auth_provider.dart';
+import 'package:news_app_fe/features/auth/presentation/riverpod/state/register_form_state.dart';
+import 'package:news_app_fe/features/auth/presentation/widgets/auth_footer.dart';
+import 'package:news_app_fe/features/auth/presentation/widgets/custom_button.dart';
+import 'package:news_app_fe/features/auth/presentation/widgets/form_text_field.dart';
 
 class RegisterPage extends ConsumerStatefulWidget {
   const RegisterPage({super.key});
@@ -21,6 +22,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
 
     Future.microtask(() {
       ref.read(registerProvider.notifier).reset();
+      ref.read(registerFormProvider.notifier).reset();
       // emailController.clear();
       // passwordController.clear();
     });
@@ -28,8 +30,9 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
-    final state = ref.watch(registerProvider);
-    final notifier = ref.read(registerProvider.notifier);
+    final formState = ref.watch(registerFormProvider);
+    final registerNotifier = ref.read(registerProvider.notifier);
+    final formNotifier = ref.read(registerFormProvider.notifier);
 
     return Scaffold(
       appBar: const CommonAppBar(),
@@ -64,7 +67,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                 SizedBox(height: 32),
                 FormTextField(
                   // controller: emailController,
-                  textOnChanged: (value) => notifier.setFullName(value),
+                  textOnChanged: (value) => formNotifier.setFullName(value),
                   textfieldLabel: 'Name',
                   textfieldHint: 'Full name',
                   textfieldIcon: 'assets/icons/user.svg',
@@ -72,8 +75,8 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                 SizedBox(height: 18),
                 FormTextField(
                   // controller: passwordController,
-                  textOnChanged: (value) => notifier.setEmail(value),
-                  errorMessage: state.emailError,
+                  textOnChanged: (value) => formNotifier.setEmail(value),
+                  errorMessage: formState.emailError,
                   textfieldLabel: 'Email',
                   textfieldHint: 'Email address',
                   textfieldIcon: 'assets/icons/email.svg',
@@ -81,8 +84,8 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                 SizedBox(height: 18),
                 FormTextField(
                   // controller: passwordController,
-                  textOnChanged: (value) => notifier.setPassword(value),
-                  errorMessage: state.passwordError,
+                  textOnChanged: (value) => formNotifier.setPassword(value),
+                  errorMessage: formState.passwordError,
                   textfieldLabel: 'Password',
                   textfieldHint: 'Create password',
                   textfieldIcon: 'assets/icons/lock.svg',
@@ -91,8 +94,9 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                 SizedBox(height: 18),
                 FormTextField(
                   // controller: passwordController,
-                  textOnChanged: (value) => notifier.setConfirmPassword(value),
-                  errorMessage: state.confirmPasswordError,
+                  textOnChanged:
+                      (value) => formNotifier.setConfirmPassword(value),
+                  errorMessage: formState.confirmPasswordError,
                   textfieldLabel: 'Confirm Password',
                   textfieldHint: 'Confirm password',
                   textfieldIcon: 'assets/icons/lock.svg',
@@ -104,10 +108,10 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                   buttonLabelColor: Colors.white,
                   buttonColor: const Color(0xff0864ED),
                   onPressed:
-                      state.isValid
+                      formState.isValid
                           ? () {
-                            notifier.submit();
-                            context.go('/login');
+                            registerNotifier.submit();
+                            context.go('/home');
                           }
                           : null,
                 ),

@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 // import 'package:flutter_svg/svg.dart';
-import 'package:news_app_fe/core/widgets/common_app_bar.dart';
-import 'package:news_app_fe/features/auth/view/widgets/auth_footer.dart';
-import 'package:news_app_fe/features/auth/view/widgets/custom_button.dart';
-import 'package:news_app_fe/features/auth/view/widgets/form_text_field.dart';
-import 'package:news_app_fe/features/auth/view/widgets/or_divider.dart';
-import 'package:news_app_fe/features/auth/viewmodel/login_viewmodel.dart';
+import 'package:news_app_fe/shared/presentation/widgets/common_app_bar.dart';
+import 'package:news_app_fe/features/auth/presentation/riverpod/provider/auth_provider.dart';
+import 'package:news_app_fe/features/auth/presentation/riverpod/state/login_form_state.dart';
+import 'package:news_app_fe/features/auth/presentation/widgets/auth_footer.dart';
+// import 'package:news_app_fe/features/auth/presentation/widgets/auth_footer.dart';
+import 'package:news_app_fe/features/auth/presentation/widgets/custom_button.dart';
+import 'package:news_app_fe/features/auth/presentation/widgets/form_text_field.dart';
+import 'package:news_app_fe/features/auth/presentation/widgets/or_divider.dart';
 
 class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});
@@ -17,8 +19,8 @@ class LoginPage extends ConsumerStatefulWidget {
 }
 
 class _LoginPageState extends ConsumerState<LoginPage> {
-  // final emailController = TextEditingController();
-  // final passwordController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
 
   @override
   void initState() {
@@ -26,6 +28,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
     Future.microtask(() {
       ref.read(loginProvider.notifier).reset();
+      ref.read(loginFormProvider.notifier).reset();
       // emailController.clear();
       // passwordController.clear();
     });
@@ -33,8 +36,10 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    final state = ref.watch(loginProvider);
-    final notifier = ref.read(loginProvider.notifier);
+    // final loginState = ref.watch(loginProvider);
+    final formState = ref.watch(loginFormProvider);
+    final loginNotifier = ref.read(loginProvider.notifier);
+    final formNotifier = ref.read(loginFormProvider.notifier);
 
     return Scaffold(
       appBar: CommonAppBar(),
@@ -66,8 +71,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
             SizedBox(height: 32),
             FormTextField(
               // controller: emailController,
-              textOnChanged: (value) => notifier.setEmail(value),
-              errorMessage: state.emailError,
+              textOnChanged: (value) => formNotifier.setEmail(value),
+              errorMessage: formState.emailError,
               textfieldLabel: 'Email',
               textfieldHint: 'Email address',
               textfieldIcon: 'assets/icons/email.svg',
@@ -75,8 +80,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
             SizedBox(height: 18),
             FormTextField(
               // controller: passwordController,
-              textOnChanged: (value) => notifier.setPassword(value),
-              errorMessage: state.passwordError,
+              textOnChanged: (value) => formNotifier.setPassword(value),
+              errorMessage: formState.passwordError,
               textfieldLabel: 'Password',
               textfieldHint: 'Password',
               textfieldIcon: 'assets/icons/lock.svg',
@@ -88,9 +93,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
               buttonLabelColor: Colors.white,
               buttonColor: const Color(0xff0864ED),
               onPressed:
-                  state.isValid
+                  formState.isValid
                       ? () {
-                        notifier.submit();
+                        loginNotifier.submit();
                         context.go('/home');
                       }
                       : null,

@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:news_app_fe/core/services/api_service.dart';
 import 'package:news_app_fe/features/profile/data/data_sources/remote/abstract_user_info_api.dart';
-import 'package:news_app_fe/features/profile/data/models/user_model.dart';
+import 'package:news_app_fe/features/profile/data/models/profile_response_model.dart';
 import 'package:news_app_fe/features/profile/domain/entities/user_info_params.dart';
 
 class UserInfoImplApi implements AbstractUserInfoApi {
@@ -10,7 +10,7 @@ class UserInfoImplApi implements AbstractUserInfoApi {
   UserInfoImplApi(this.apiService);
 
   @override
-  Future<UserModel> fetchUserInfo(UserInfoParams userParams) async {
+  Future<ProfileResponseModel> fetchUserInfo(UserInfoParams userParams) async {
     try {
       final response = await apiService.getData(
         '/users/${userParams.userId}',
@@ -20,7 +20,7 @@ class UserInfoImplApi implements AbstractUserInfoApi {
       if (response.statusCode == 200) {
         final data = response.data;
         if (data['success'] == true && data['data'] != null) {
-          return UserModel.fromJson(data['data']);
+          return ProfileResponseModel.fromJson(data);
         } else {
           throw Exception(
             'Invalid response format: ${data['message'] ?? 'Unknown error'}',

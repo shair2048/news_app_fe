@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:news_app_fe/core/errors/failures.dart';
 import 'package:news_app_fe/features/profile/data/data_sources/remote/abstract_user_info_api.dart';
-import 'package:news_app_fe/features/profile/domain/entities/user.dart';
 import 'package:news_app_fe/features/profile/domain/entities/user_info_params.dart';
 import 'package:news_app_fe/features/profile/domain/repositories/abstract_user_info_repo.dart';
+import 'package:news_app_fe/shared/domain/entities/user.dart';
 
 class UserInfoRepositoryImpl implements AbstractUserInfoRepository {
   final AbstractUserInfoApi userInfoApi;
@@ -13,8 +13,8 @@ class UserInfoRepositoryImpl implements AbstractUserInfoRepository {
   @override
   Future<Either<Failure, User>> getUserInfo(UserInfoParams params) async {
     try {
-      final userModel = await userInfoApi.fetchUserInfo(params);
-      return Right(userModel.toEntity());
+      final profileResponseModel = await userInfoApi.fetchUserInfo(params);
+      return Right(profileResponseModel.user.toEntity());
     } catch (e) {
       // Handle different types of errors
       if (e.toString().contains('401')) {
