@@ -1,16 +1,15 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:news_app_fe/core/widgets/common_bottom_nav_bar.dart';
-// import 'package:news_app_fe/core/themes/app_theme.dart';
-import 'package:news_app_fe/features/auth/view/pages/login_page.dart';
-import 'package:news_app_fe/features/auth/view/pages/register_page.dart';
+import 'package:news_app_fe/shared/presentation/widgets/common_bottom_nav_bar.dart';
 import 'package:go_router/go_router.dart';
+import 'package:news_app_fe/features/auth/presentation/pages/login_page.dart';
+import 'package:news_app_fe/features/auth/presentation/pages/register_page.dart';
 import 'package:news_app_fe/features/bookmark/view/pages/bookmark_page.dart';
 import 'package:news_app_fe/features/category/view/pages/category_page.dart';
-import 'package:news_app_fe/features/home/view/pages/home_page.dart';
-import 'package:news_app_fe/features/profile/view/pages/profile_page.dart';
-import 'package:news_app_fe/features/search/view/pages/search_page.dart';
+import 'package:news_app_fe/features/home/presentation/pages/home_page.dart';
+import 'package:news_app_fe/features/profile/presentation/pages/profile_page.dart';
+import 'package:news_app_fe/features/search/presentation/pages/search_page.dart';
 import 'package:news_app_fe/features/news_detail/view/pages/news_detail_page.dart';
 import 'package:logging/logging.dart';
 
@@ -28,7 +27,7 @@ void main() {
 
 /// The route configuration.
 final GoRouter _router = GoRouter(
-  initialLocation: '/login',
+  initialLocation: '/home',
 
   routes: <RouteBase>[
     GoRoute(path: '/login', builder: (context, state) => const LoginPage()),
@@ -37,7 +36,7 @@ final GoRouter _router = GoRouter(
       builder: (context, state) => const RegisterPage(),
     ),
 
-    /// ShellRoute chứa bottom navigation
+    /// ShellRoute - bottom navigation
     ShellRoute(
       builder: (context, state, child) {
         return Scaffold(body: child, bottomNavigationBar: CommonBottomNavBar());
