@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:news_app_fe/features/article_detail/presentation/riverpod/article_detail_provider.dart';
 import 'package:news_app_fe/shared/presentation/widgets/common_app_bar.dart';
-import '../widgets/news_author_infor.dart';
-import '../widgets/news_content_section.dart';
-import '../widgets/news_header.dart';
+import '../widgets/article_author_infor.dart';
+import '../widgets/article_content_section.dart';
+import '../widgets/article_header.dart';
 import 'package:news_app_fe/features/home/presentation/widgets/latest_articles.dart';
-import 'package:news_app_fe/features/news_detail/viewmodel/news_detail_viewmodel.dart';
 
-class NewsDetailPage extends ConsumerWidget {
-  const NewsDetailPage({super.key});
+class ArticleDetailPage extends ConsumerWidget {
+  final String articleId;
+
+  const ArticleDetailPage({super.key, required this.articleId});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final news = ref.watch(newsProvider).getNewsDetail();
+    final news = ref.watch(articleProvider).getNewsDetail();
 
     return Scaffold(
       appBar: const CommonAppBar(appBarTitle: 'News Detail'),
@@ -20,17 +22,17 @@ class NewsDetailPage extends ConsumerWidget {
       body: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
         children: [
-          NewsHeader(title: news.title),
+          ArticleHeader(title: news.title),
           const SizedBox(height: 24),
-          NewsAuthorInfo(
+          ArticleAuthorInfo(
             // authorImage: news.authorImage,
             // authorName: news.authorName,
             publishedDate: news.createdAt,
           ),
           const SizedBox(height: 24),
-          NewsContentSection(content: news.description),
+          ArticleContentSection(content: news.description),
           const SizedBox(height: 24),
-          // NewsFeedbackSection(likes: news.likes, comments: news.comments),
+          // ArticleFeedbackSection(likes: news.likes, comments: news.comments),
           const SizedBox(height: 32),
           LatestNews(),
         ],

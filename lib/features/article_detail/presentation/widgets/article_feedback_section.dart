@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class NewsFeedbackSection extends StatelessWidget {
+class ArticleFeedbackSection extends StatelessWidget {
   final int likes;
   final int comments;
 
-  const NewsFeedbackSection({
+  const ArticleFeedbackSection({
     super.key,
     required this.likes,
     required this.comments,
@@ -17,12 +17,13 @@ class NewsFeedbackSection extends StatelessWidget {
       children: [
         Row(
           children: [
-            const Text(
-              'Share:',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
+            const Text('Share:', style: TextStyle(fontWeight: FontWeight.bold)),
             const SizedBox(width: 16),
-            for (var icon in [Icons.facebook, Icons.email, Icons.content_paste_go_outlined])
+            for (var icon in [
+              Icons.facebook,
+              Icons.email,
+              Icons.content_paste_go_outlined,
+            ])
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 4.0),
                 child: Icon(icon, size: 35, color: Colors.blueAccent),
@@ -38,21 +39,14 @@ class NewsFeedbackSection extends StatelessWidget {
         TextField(
           decoration: InputDecoration(
             hintText: 'Write your feedback about this blog…',
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
             filled: true,
             fillColor: Colors.grey[100],
           ),
           maxLines: 3,
         ),
         const SizedBox(height: 12),
-        ElevatedButton(
-          onPressed: () {
-
-          },
-          child: const Text('POST COMMENTS'),
-        ),
+        ElevatedButton(onPressed: () {}, child: const Text('POST COMMENTS')),
       ],
     );
   }

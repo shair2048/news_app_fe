@@ -24,7 +24,6 @@ class _HomePageState extends ConsumerState<HomePage> {
           TopCategory(),
           const SizedBox(height: 32),
           MostRead(),
-          // Expanded(child: MostRead()),
           const SizedBox(height: 32),
           LatestNews(),
         ],

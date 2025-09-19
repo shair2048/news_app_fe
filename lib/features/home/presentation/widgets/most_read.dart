@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:news_app_fe/features/home/presentation/riverpod/most_read_provider.dart';
 import 'package:news_app_fe/features/home/presentation/widgets/news_shimmer_loading.dart';
 
@@ -63,7 +64,7 @@ class MostRead extends ConsumerWidget {
 
                     child: InkWell(
                       onTap: () {
-                        // Handle tap
+                        context.push('/article_detail/${mostRead.articleId}');
                       },
                       child: Row(
                         children: [

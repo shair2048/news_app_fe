@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class NewsHeader extends StatelessWidget {
+class ArticleHeader extends StatelessWidget {
   final String title;
   final String? imageUrl;
 
-  const NewsHeader({super.key, required this.title, this.imageUrl});
+  const ArticleHeader({super.key, required this.title, this.imageUrl});
 
   @override
   Widget build(BuildContext context) {

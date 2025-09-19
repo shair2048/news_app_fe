@@ -6,7 +6,7 @@ part 'article_model.g.dart';
 @JsonSerializable()
 class ArticleModel {
   @JsonKey(name: '_id')
-  final String newsId;
+  final String articleId;
   final String title;
   final String content;
   final String imageUrl;
@@ -14,7 +14,7 @@ class ArticleModel {
   final String createdAt;
 
   ArticleModel({
-    required this.newsId,
+    required this.articleId,
     required this.title,
     required this.content,
     required this.imageUrl,
@@ -28,7 +28,7 @@ class ArticleModel {
 
   Article toEntity() {
     return Article(
-      newsId: newsId,
+      articleId: articleId,
       title: title,
       content: content,
       imageUrl: imageUrl,

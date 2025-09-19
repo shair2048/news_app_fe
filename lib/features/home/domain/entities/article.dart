@@ -1,5 +1,5 @@
 class Article {
-  final String newsId;
+  final String articleId;
   final String title;
   final String content;
   final String imageUrl;
@@ -7,7 +7,7 @@ class Article {
   final String createdAt;
 
   Article({
-    required this.newsId,
+    required this.articleId,
     required this.title,
     required this.content,
     required this.imageUrl,

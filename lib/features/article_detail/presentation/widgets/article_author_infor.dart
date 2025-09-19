@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 // import 'package:flutter_svg/flutter_svg.dart';
 
-class NewsAuthorInfo extends StatelessWidget {
+class ArticleAuthorInfo extends StatelessWidget {
   final String? authorAvatar;
   final String? authorName;
   final String publishedDate;
 
-  const NewsAuthorInfo({
+  const ArticleAuthorInfo({
     super.key,
     this.authorAvatar,
     this.authorName,
