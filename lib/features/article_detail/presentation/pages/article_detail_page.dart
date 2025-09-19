@@ -14,28 +14,55 @@ class ArticleDetailPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final news = ref.watch(articleProvider).getNewsDetail();
+    final articleState = ref.watch(articleDetailProvider(articleId));
 
     return Scaffold(
       appBar: const CommonAppBar(appBarTitle: 'News Detail'),
       backgroundColor: Colors.white,
-      body: ListView(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
-        children: [
-          ArticleHeader(title: news.title),
-          const SizedBox(height: 24),
-          ArticleAuthorInfo(
-            // authorImage: news.authorImage,
-            // authorName: news.authorName,
-            publishedDate: news.createdAt,
-          ),
-          const SizedBox(height: 24),
-          ArticleContentSection(content: news.description),
-          const SizedBox(height: 24),
-          // ArticleFeedbackSection(likes: news.likes, comments: news.comments),
-          const SizedBox(height: 32),
-          LatestNews(),
-        ],
+
+      body: articleState.when(
+        loading: () => const Center(child: CircularProgressIndicator()),
+        error:
+            (error, stackTrace) => Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(Icons.error_outline, size: 64, color: Colors.red),
+                  const SizedBox(height: 16),
+                  Text(
+                    'Oops! Something went wrong',
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    error.toString(),
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                  const SizedBox(height: 16),
+                  ElevatedButton(
+                    onPressed: () {
+                      ref.invalidate(articleDetailProvider(articleId));
+                    },
+                    child: const Text('Try Again'),
+                  ),
+                ],
+              ),
+            ),
+
+        data:
+            (article) => ListView(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
+              children: [
+                ArticleHeader(title: article.title, imageUrl: article.imageUrl),
+                const SizedBox(height: 24),
+                ArticleAuthorInfo(publishedDate: article.createdAt),
+                const SizedBox(height: 24),
+                ArticleContentSection(content: article.content),
+                const SizedBox(height: 32),
+                const LatestNews(),
+              ],
+            ),
       ),
     );
   }

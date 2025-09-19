@@ -1,31 +1,31 @@
-class NewsDetailModel {
-  final String title;
-  final String description;
-  // final String imageUrl;
-  // final String authorName;
-  // final String authorAvatar;
-  final String createdAt;
-  // final int likes;
-  // final int comments;
+import 'package:json_annotation/json_annotation.dart';
+import 'package:news_app_fe/features/article_detail/domain/entities/article_detail.dart';
 
-  NewsDetailModel({
+part 'article_detail_model.g.dart';
+
+@JsonSerializable()
+class ArticleDetailModel {
+  final String title;
+  final String content;
+  final String imageUrl;
+  final String createdAt;
+
+  ArticleDetailModel({
     required this.title,
-    required this.description,
-    // required this.imageUrl,
-    // required this.authorName,
-    // required this.authorAvatar,
+    required this.content,
+    required this.imageUrl,
     required this.createdAt,
-    // required this.likes,
-    // required this.comments,
   });
 
-  factory NewsDetailModel.fromJson(Map<String, dynamic> json) {
-    return NewsDetailModel(
-      title: json['title'] as String? ?? '',
-      description: json['content'] as String? ?? '',
-      // imageUrl: json['imageUrl'] as String? ?? '',
-      // authorName: json['readCount'] as int? ?? 0,
-      createdAt: json['createdAt'] as String? ?? '',
+  factory ArticleDetailModel.fromJson(Map<String, dynamic> json) =>
+      _$ArticleDetailModelFromJson(json);
+
+  ArticleDetail toEntity() {
+    return ArticleDetail(
+      title: title,
+      content: content,
+      imageUrl: imageUrl,
+      createdAt: createdAt,
     );
   }
 }
