@@ -3,26 +3,31 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class ArticleHeader extends StatelessWidget {
   final String title;
-  final String? imageUrl;
+  final String imageUrl;
 
-  const ArticleHeader({super.key, required this.title, this.imageUrl});
+  const ArticleHeader({super.key, required this.title, required this.imageUrl});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(8),
-          child: SvgPicture.asset(
-            'assets/icons/newsdetail.svg',
-            width: double.infinity,
-            height: 200,
-            fit: BoxFit.cover,
-          ),
+        Image.network(
+          imageUrl,
+          width: double.infinity,
+          height: 200,
+          fit: BoxFit.cover,
+          errorBuilder:
+              (_, __, ___) => Container(
+                width: double.infinity,
+                height: 200,
+                color: Colors.grey[300],
+                child: const Icon(Icons.broken_image),
+              ),
         ),
         const SizedBox(height: 16),
         Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               children: [

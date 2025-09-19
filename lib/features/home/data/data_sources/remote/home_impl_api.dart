@@ -9,8 +9,8 @@ class HomeImplApi implements AbstractHomeApi {
 
   @override
   Future<List<ArticleModel>> fetchArticles() async {
-    final response = await apiService.getData('/news');
-    final List newsInfo = response.data;
+    final response = await apiService.getData('/articles');
+    final List newsInfo = response.data['data'];
 
     return newsInfo.map((item) => ArticleModel.fromJson(item)).toList();
   }
