@@ -1,18 +1,15 @@
 import 'package:news_app_fe/core/services/api_service.dart';
 import 'package:news_app_fe/features/home/data/model/article_model.dart';
+import 'package:news_app_fe/features/article_detail/data/data_sources/remote/abstract_news_detail_api.dart';
 
-abstract class NewsDetailRepository {
-  Future<List<ArticleModel>> showNews();
-}
+class NewsDetailImplApi implements AbstractNewsDetailApi {
+  final ApiService apiService;
 
-class NewsDetailRepositoryImpl implements NewsDetailRepository {
-  final ApiService api;
-
-  NewsDetailRepositoryImpl(this.api);
+  NewsDetailImplApi(this.apiService);
 
   @override
   Future<List<ArticleModel>> showNews() async {
-    final response = await api.getData('/news');
+    final response = await apiService.getData('/news/:id');
     final List newsInfo = response.data;
 
     return newsInfo.map((item) => ArticleModel.fromJson(item)).toList();

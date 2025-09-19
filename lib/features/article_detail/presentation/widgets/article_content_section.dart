@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class NewsContentSection extends StatelessWidget {
+class ArticleContentSection extends StatelessWidget {
   final String content;
 
-  const NewsContentSection({super.key, required this.content});
+  const ArticleContentSection({super.key, required this.content});
 
   @override
   Widget build(BuildContext context) {

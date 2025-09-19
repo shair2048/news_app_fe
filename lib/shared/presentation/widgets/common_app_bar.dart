@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 
 class CommonAppBar extends ConsumerWidget implements PreferredSizeWidget {
   final String? appBarTitle;
@@ -32,7 +33,7 @@ class CommonAppBar extends ConsumerWidget implements PreferredSizeWidget {
           colorFilter: ColorFilter.mode(Colors.black, BlendMode.srcIn),
         ),
         onPressed: () {
-          // Navigator.pop(context);
+          context.pop();
         },
       ),
       bottom: PreferredSize(

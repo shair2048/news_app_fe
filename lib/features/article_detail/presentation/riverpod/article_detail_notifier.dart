@@ -1,9 +1,6 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../model/news_detail_model.dart';
+import '../../data/model/article_detail_model.dart';
 
-final newsProvider = Provider<NewsViewModel>((ref) => NewsViewModel());
-
-class NewsViewModel {
+class ArticleDetailNotifier {
   NewsDetailModel getNewsDetail() {
     return NewsDetailModel(
       title:

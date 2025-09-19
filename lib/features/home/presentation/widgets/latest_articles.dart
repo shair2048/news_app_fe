@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:news_app_fe/features/home/presentation/riverpod/latest_articles_provider.dart';
 import 'package:news_app_fe/features/home/presentation/widgets/news_shimmer_loading.dart';
 
@@ -63,7 +64,7 @@ class LatestNews extends ConsumerWidget {
 
                     child: InkWell(
                       onTap: () {
-                        // Handle tap
+                        context.push('/article_detail/${latestNews.articleId}');
                       },
                       child: Row(
                         children: [
